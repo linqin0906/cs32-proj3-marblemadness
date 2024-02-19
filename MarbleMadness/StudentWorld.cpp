@@ -36,11 +36,23 @@ int StudentWorld::move()
 
     setGameStatText("Game will end when you type q");
     
+    bool result = everyoneDoSomething();
+    if (!result) return GWSTATUS_PLAYER_DIED;
+    else {player->doSomething();}
+    
 	return GWSTATUS_CONTINUE_GAME;
 }
 
 void StudentWorld::cleanUp()
 {
+    if (player->isAlive()) delete player; //player isn't already deleted
+    
+    list<Actor*>::iterator it = actorList.begin();
+    while (it != actorList.end()) {
+        Actor* temp = *it;
+        it = actorList.erase(it);
+        delete temp;
+    }
 }
 
 int StudentWorld::loadALevel(string currLevel) {
@@ -56,17 +68,30 @@ int StudentWorld::loadALevel(string currLevel) {
             Level::MazeEntry item = lev.getContentsOf(r, c);
             
             if (item == Level::player)
-                player = new Avatar(r, c);
-            else if (item == Level::wall)
-                actorList.push_back(new Wall(r, c));
+                player = new Avatar(r, c, this);
+            else if (item == Level::wall) 
+                actorList.push_back(new Wall(r, c, this));
         }
     }
     
     return 0;
 }
 
+//everyone does something EXCEPT player
+bool StudentWorld::everyoneDoSomething() {
+    list<Actor*>::iterator it = actorList.begin();
+    while (it != actorList.end()) {
+        if ((*it)->isAlive()) {
+            (*it)->doSomething();
+            if (!player->isAlive()) return false;
+        }
+        it++;
+    }
+    return true;
+}
+
 StudentWorld::~StudentWorld() {
-    delete player;
+    if (player->isAlive()) delete player; //player isn't already deleted
     
     list<Actor*>::iterator it = actorList.begin();
     while (it != actorList.end()) {

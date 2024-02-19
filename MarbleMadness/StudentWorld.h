@@ -23,7 +23,7 @@ public:
 private:
     int loadALevel(std::string currLevel);
     std::string getLevelPath(int level);
-    
+    bool everyoneDoSomething();
     std::list<Actor*> actorList;
     Avatar* player;
 };
