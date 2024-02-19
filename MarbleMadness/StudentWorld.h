@@ -18,11 +18,12 @@ public:
   virtual int init();
   virtual int move();
   virtual void cleanUp();
+    Actor* getActor(int r, int c);
+
     ~StudentWorld();
     
 private:
     int loadALevel(std::string currLevel);
-    std::string getLevelPath(int level);
     bool everyoneDoSomething();
     std::list<Actor*> actorList;
     Avatar* player;

@@ -55,6 +55,16 @@ void StudentWorld::cleanUp()
     }
 }
 
+Actor* StudentWorld::getActor(int r, int c) {
+    list<Actor*>::iterator it = actorList.begin();
+    while (it != actorList.end()) {
+        if ((*it)->getX() == r && (*it)->getY() == c)
+            return *it;
+        it++;
+    }
+    return nullptr;
+}
+
 int StudentWorld::loadALevel(string currLevel) {
    
     Level lev(assetPath()); 
@@ -69,7 +79,7 @@ int StudentWorld::loadALevel(string currLevel) {
             
             if (item == Level::player)
                 player = new Avatar(r, c, this);
-            else if (item == Level::wall) 
+            else if (item == Level::wall)
                 actorList.push_back(new Wall(r, c, this));
         }
     }

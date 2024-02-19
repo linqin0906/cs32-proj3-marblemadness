@@ -1,6 +1,8 @@
 #include "Actor.h"
 #include "StudentWorld.h"
 
+#include <iostream>
+
 // Students:  Add code to this file, Actor.h, StudentWorld.h, and StudentWorld.cpp
 
 //*********** ACTOR ***********//
@@ -42,20 +44,45 @@ void Avatar::doSomething() { //FIXME: incomplete
     if(getWorld()->getKey(ch)) {
         switch(ch) {
             case KEY_PRESS_LEFT:
-                moveTo(getX()-1, getY());
+                setDirection(left);
+                if (canMove(left)) moveTo(getX()-1, getY());
                 break;
             case KEY_PRESS_RIGHT:
-                moveTo(getX()+1, getY());
+                setDirection(right);
+                if (canMove(right)) moveTo(getX()+1, getY());
                 break;
             case KEY_PRESS_UP:
-                moveTo(getX(), getY()+1);
+                setDirection(up);
+                if (canMove(up)) moveTo(getX(), getY()+1);
                 break;
             case KEY_PRESS_DOWN:
-                moveTo(getX(), getY()-1);
+                setDirection(down);
+                if (canMove(down)) moveTo(getX(), getY()-1);
                 break;
-
         }
     }
+}
+
+bool Avatar::canMove(int dir) {
+    double newX = getX();
+    double newY = getY();
+    
+    switch(dir) {
+        case left:
+            newX--;
+            break;
+        case right:
+            newX++;
+            break;
+        case up:
+            newY++;
+            break;
+        case down:
+            newY--;
+            break;
+    }
+    if (getWorld()->getActor(newX, newY) != nullptr) return false;
+    return true;
 }
 
 

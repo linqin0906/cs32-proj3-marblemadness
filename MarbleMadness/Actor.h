@@ -28,6 +28,8 @@ class Avatar: public Actor {
     public:
         Avatar(double startX, double startY, StudentWorld* sWorld);
         virtual void doSomething();
+    private:
+        bool canMove(int dir);
 };
 
 #endif // ACTOR_H_
