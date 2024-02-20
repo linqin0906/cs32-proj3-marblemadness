@@ -6,9 +6,11 @@
 // Students:  Add code to this file, Actor.h, StudentWorld.h, and StudentWorld.cpp
 
 //*********** ACTOR ***********//
+//Actors are created visible, with no direction, and alive
 Actor::Actor(int imageID, double startX, double startY, StudentWorld* sWorld): GraphObject(imageID, startX, startY) {
+    setVisible(true);
     setDirection(none);
-    liveStatus = false;
+    liveStatus = true;
     world = sWorld;
 }
 
@@ -25,24 +27,61 @@ void Actor::setAlive(bool alive) {
 }
 
 //*********** WALL ***********//
-Wall::Wall (double startX, double startY, StudentWorld* sWorld): Actor(IID_WALL, startX, startY, sWorld) {
-    setVisible(true);
-    setAlive(true);
-}
+Wall::Wall (double startX, double startY, StudentWorld* sWorld): Actor(IID_WALL, startX, startY, sWorld) {}
 
 void Wall::doSomething() {}
 
+//*********** COLLECTABLE ***********//
+Collectable::Collectable(int imageID, double startX, double startY, StudentWorld* sWorld): Actor(imageID, startX, startY, sWorld) {}
+
+void Collectable::beCollected(int points, int soundID) {
+    getWorld()->increaseScore(points);
+    setAlive(false);
+    getWorld()->playSound(soundID);
+}
+
+//*********** CRYSTAL ***********//
+Crystal::Crystal (double startX, double startY, StudentWorld* sWorld): Collectable(IID_CRYSTAL, startX, startY, sWorld) {}
+
+void Crystal::doSomething() {
+    if (!isAlive()) return;
+    if (getWorld()->isPlayerOn(getX(), getY())) {
+        beCollected(50, SOUND_GOT_GOODIE);
+        getWorld()->decCrystals();
+    }
+}
+
+//*********** EXIT ***********//
+Exit::Exit(double startX, double startY, StudentWorld* sWorld): Collectable(IID_EXIT, startX, startY, sWorld) {
+    setVisible(false);
+}
+
+void Exit::doSomething() {
+    if (getWorld() -> getCrystals() == 0 && !isVisible()) {
+        setVisible(true);
+        getWorld()->playSound(SOUND_REVEAL_EXIT);
+        return;
+    }
+    if (getWorld()->isPlayerOn(getX(), getY()) && isVisible() && getWorld()->getCrystals()==0) {
+        beCollected(2000, SOUND_FINISHED_LEVEL);
+        getWorld()->setLevelComplete(true);
+    }
+}
+
 //*********** AVATAR ***********//
 Avatar::Avatar (double startX, double startY, StudentWorld* sWorld) : Actor(IID_PLAYER, startX, startY, sWorld) {
-    setVisible(true);
-    setAlive(true);
     setDirection(right);
 }
-void Avatar::doSomething() { //FIXME: incomplete
+
+//FIXME: incomplete
+void Avatar::doSomething() {
     if (!isAlive()) return;
     int ch;
     if(getWorld()->getKey(ch)) {
         switch(ch) {
+            case KEY_PRESS_ESCAPE:
+                setAlive(false);
+                break;
             case KEY_PRESS_LEFT:
                 setDirection(left);
                 if (canMove(left)) moveTo(getX()-1, getY());
@@ -63,6 +102,7 @@ void Avatar::doSomething() { //FIXME: incomplete
     }
 }
 
+//FIXME: only checks to see if there's something else
 bool Avatar::canMove(int dir) {
     double newX = getX();
     double newY = getY();
@@ -81,7 +121,8 @@ bool Avatar::canMove(int dir) {
             newY--;
             break;
     }
-    if (getWorld()->getActor(newX, newY) != nullptr) return false;
+    Actor* act = getWorld()->getActor(newX, newY);
+    if (act != nullptr && !act->isCollectable()) return false;
     return true;
 }
 

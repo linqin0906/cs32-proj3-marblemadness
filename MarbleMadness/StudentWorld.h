@@ -19,14 +19,24 @@ public:
   virtual int move();
   virtual void cleanUp();
     Actor* getActor(int r, int c);
+    bool isPlayerOn(int r, int c);
+    void setDisplayText();
+    int getCrystals();
+    void decCrystals();
+    void setLevelComplete(bool complete);
 
     ~StudentWorld();
     
 private:
     int loadALevel(std::string currLevel);
+    void cleanDeadActors();
     bool everyoneDoSomething();
+    
     std::list<Actor*> actorList;
     Avatar* player;
+    int levelBonus;
+    int numCrystals;
+    bool isLevelComplete;
 };
 
 #endif // STUDENTWORLD_H_
