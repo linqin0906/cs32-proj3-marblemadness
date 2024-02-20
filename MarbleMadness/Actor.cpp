@@ -68,8 +68,36 @@ void Exit::doSomething() {
     }
 }
 
+//*********** MORTAL ***********//
+Mortal::Mortal(int hp, int imageID, double startX, double startY, StudentWorld* sWorld): Actor(imageID, startX, startY, sWorld) {
+    hitpoints = hp;
+}
+
+void Mortal::takeDamage() {
+    hitpoints -= 2;
+    if (hitpoints <= 0) setAlive(false);
+}
+
+void Mortal::incHealth(int amt) {
+    hitpoints += amt;
+}
+
+//*********** MARBLE ***********//
+//Marble::Marble(double startX, double startY, StudentWorld* sWorld): Mortal(10, IID_MARBLE, startX, startY, sWorld) {}
+//
+//void Marble::doSomething() {}
+//
+//void Marble::push(int r, int c) {
+//    Actor* act = getWorld()->getActor(r, c);
+//    if (act == nullptr); //FIXME: BLANK
+//}
+
+
+//*********** FIGHTER ***********//
+Fighter::Fighter (int hp, int imageID, double startX, double startY, StudentWorld* sWorld): Mortal(hp, imageID, startX, startY, sWorld) {}
+
 //*********** AVATAR ***********//
-Avatar::Avatar (double startX, double startY, StudentWorld* sWorld) : Actor(IID_PLAYER, startX, startY, sWorld) {
+Avatar::Avatar (double startX, double startY, StudentWorld* sWorld) : Fighter(20, IID_PLAYER, startX, startY, sWorld) { //FIXME: not sure about the fighter constructor
     setDirection(right);
 }
 
