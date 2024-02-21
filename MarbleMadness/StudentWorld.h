@@ -18,7 +18,7 @@ public:
   virtual int init();
   virtual int move();
   virtual void cleanUp();
-    Actor* getActor(int r, int c);
+    Actor* getActor(int r, int c, Actor* a);
     bool isPlayerOn(int r, int c);
     void setDisplayText();
     int getCrystals();

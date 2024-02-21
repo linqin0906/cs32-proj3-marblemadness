@@ -12,9 +12,12 @@ class Actor: public GraphObject {
     public:
         Actor(int imageID, double startX, double startY, StudentWorld* sWorld);
         virtual void doSomething() = 0;
-        virtual bool canScore() {return false;};
-        virtual bool isCollectable() {return false;};
-        virtual bool isDamageable() {return false;};
+        virtual bool canScore() {return false;}
+        virtual bool isCollectable() {return false;}
+        virtual bool isDamageable() {return false;}
+        virtual bool canReceive() {return false;}
+        virtual bool canAttack() {return false;}
+        virtual bool push(int r, int c) {return false;}
         bool isAlive();
         void setAlive(bool alive);
         StudentWorld* getWorld();
@@ -24,11 +27,18 @@ class Actor: public GraphObject {
 };
 
 class Pea: public Actor {
-    
+    public:
+    Pea(int direction, double startX, double startY, StudentWorld* sWorld);
+    virtual void doSomething();
+    private:
+    int dir;
 };
 
 class Pit: public Actor {
-    
+    public:
+    Pit(double startX, double startY, StudentWorld* sWorld);
+    virtual void doSomething();
+    virtual bool canReceive() {return true;}
 };
 
 class Wall: public Actor {
@@ -54,15 +64,19 @@ class Mortal: public Actor {
     int hitpoints;
 };
 
+// *********** MARBLE *********** //
 class Marble: public Mortal {
-    
+    public:
+    Marble(double startX, double startY, StudentWorld* sWorld);
+    virtual void doSomething();
+    virtual bool push(int r, int c);
 };
 
 // *********** FIGHTERS *********** //
 class Fighter: public Mortal {
     public:
     Fighter(int hp, int imageID, double startX, double startY, StudentWorld* sWorld);
-
+    virtual bool canAttack() {return true;}
 };
 
 class Avatar: public Fighter {
@@ -70,6 +84,7 @@ class Avatar: public Fighter {
         Avatar(double startX, double startY, StudentWorld* sWorld);
         virtual void doSomething();
         virtual bool canScore() {return true;}
+        bool makePush(Actor* a);
     private:
         bool canMove(int dir);
 };

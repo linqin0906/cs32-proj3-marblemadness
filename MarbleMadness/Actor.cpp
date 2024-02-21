@@ -26,6 +26,31 @@ void Actor::setAlive(bool alive) {
     liveStatus = alive;
 }
 
+//*********** PIT ***********//
+Pit::Pit(double startX, double startY, StudentWorld* sWorld) : Actor (IID_PIT, startX, startY, sWorld){}
+
+void Pit::doSomething() {
+    if (!isAlive()) return;
+    Actor *act = getWorld()->getActor(getX(), getY(), this);
+    if (act != nullptr && act->isDamageable() && !act->canAttack()) {//if marble on same spot
+        setAlive(false);
+        act->setAlive(false);
+    }
+}
+
+//*********** PEA ***********//
+Pea::Pea(int direction, double startX, double startY, StudentWorld* sWorld) : Actor (IID_PEA, startX, startY, sWorld){
+    dir = direction;
+}
+
+void Pea::doSomething() {
+    if (!isAlive()) return;
+    Actor *act = getWorld()->getActor(getX(), getY(), this);
+    if (act != nullptr && act->isDamageable()) {
+        //TODO: fixme. level 1 - pushing marble to middle square at bottom doesn't work
+    }
+}
+
 //*********** WALL ***********//
 Wall::Wall (double startX, double startY, StudentWorld* sWorld): Actor(IID_WALL, startX, startY, sWorld) {}
 
@@ -83,15 +108,18 @@ void Mortal::incHealth(int amt) {
 }
 
 //*********** MARBLE ***********//
-//Marble::Marble(double startX, double startY, StudentWorld* sWorld): Mortal(10, IID_MARBLE, startX, startY, sWorld) {}
-//
-//void Marble::doSomething() {}
-//
-//void Marble::push(int r, int c) {
-//    Actor* act = getWorld()->getActor(r, c);
-//    if (act == nullptr); //FIXME: BLANK
-//}
+Marble::Marble(double startX, double startY, StudentWorld* sWorld): Mortal(10, IID_MARBLE, startX, startY, sWorld) {}
 
+void Marble::doSomething() {}
+
+bool Marble::push(int r, int c) {
+    Actor* act = getWorld()->getActor(r, c, this);
+    if (act == nullptr || (act != nullptr && act->canReceive())) {
+        moveTo(r, c);
+        return true;
+    }
+    return false;
+}
 
 //*********** FIGHTER ***********//
 Fighter::Fighter (int hp, int imageID, double startX, double startY, StudentWorld* sWorld): Mortal(hp, imageID, startX, startY, sWorld) {}
@@ -149,9 +177,35 @@ bool Avatar::canMove(int dir) {
             newY--;
             break;
     }
-    Actor* act = getWorld()->getActor(newX, newY);
+    Actor* act = getWorld()->getActor(newX, newY, this);
+    if (act != nullptr && act->isDamageable() && !act->canAttack()) { //if it's a marble
+        if (makePush(act)) return true; //if marble can be pushed, allow avatar to move
+        else {return false;}
+    }
     if (act != nullptr && !act->isCollectable()) return false;
     return true;
 }
 
-
+bool Avatar::makePush(Actor *a) {
+    int dir = getDirection();
+    int newX = a->getX();
+    int newY = a->getY();
+    
+    switch (dir) {
+        case left:
+            newX--;
+            break;
+        case right:
+            newX++;
+            break;
+        case up:
+            newY++;
+            break;
+        case down:
+            newY--;
+            break;
+    }
+    if (a->push(newX, newY)) {
+        return true;
+    } return false;
+}

@@ -72,11 +72,11 @@ void StudentWorld::cleanUp()
     
 }
 
-//checks for NONPLAYER actors
-Actor* StudentWorld::getActor(int r, int c) {
+//checks for NONPLAYER actors. COULD RETURN ITSELF
+Actor* StudentWorld::getActor(int r, int c, Actor* a) {
     list<Actor*>::iterator it = actorList.begin();
     while (it != actorList.end()) {
-        if ((*it)->getX() == r && (*it)->getY() == c)
+        if ((*it)->getX() == r && (*it)->getY() == c && ((*it) != a)) //make sure you don't return yourself
             return *it;
         it++;
     }
@@ -137,6 +137,10 @@ int StudentWorld::loadALevel(string currLevel) {
                 numCrystals++;
             } else if (item == Level::exit)
                 actorList.push_back(new Exit(r, c, this));
+            else if (item == Level::marble)
+                actorList.push_back(new Marble(r, c, this));
+            else if (item == Level::pit)
+                actorList.push_back(new Pit(r, c, this));
         }
     }
     
