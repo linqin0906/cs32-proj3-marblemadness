@@ -4,6 +4,7 @@
 #include <iostream>
 
 // Students:  Add code to this file, Actor.h, StudentWorld.h, and StudentWorld.cpp
+using namespace std;
 
 //*********** ACTOR ***********//
 //Actors are created visible, with no direction, and alive
@@ -26,6 +27,28 @@ void Actor::setAlive(bool alive) {
     liveStatus = alive;
 }
 
+void Actor::getPosInDir(int dir, int& newX, int& newY) {
+    int currX = getX();
+    int currY = getY();
+    
+    switch(dir) {
+        case left:
+            currX--;
+            break;
+        case right:
+            currX++;
+            break;
+        case up:
+            currY++;
+            break;
+        case down:
+            currY--;
+            break;
+    }
+    newX = currX;
+    newY = currY;
+}
+
 //*********** PIT ***********//
 Pit::Pit(double startX, double startY, StudentWorld* sWorld) : Actor (IID_PIT, startX, startY, sWorld){}
 
@@ -39,16 +62,54 @@ void Pit::doSomething() {
 }
 
 //*********** PEA ***********//
-Pea::Pea(int direction, double startX, double startY, StudentWorld* sWorld) : Actor (IID_PEA, startX, startY, sWorld){
-    dir = direction;
+Pea::Pea(int dir, double startX, double startY, StudentWorld* sWorld) : Actor (IID_PEA, startX, startY, sWorld){
+    setDirection(dir);
 }
 
 void Pea::doSomething() {
     if (!isAlive()) return;
-    Actor *act = getWorld()->getActor(getX(), getY(), this);
-    if (act != nullptr && act->isDamageable()) {
-        //TODO: fixme. level 1 - pushing marble to middle square at bottom doesn't work
+
+    if (makeWarAndPeas()) return; //pea made contact
+    moveForward();
+    if (makeWarAndPeas()) return;
+}
+
+bool Pea::makeWarAndPeas() { //max 3 nonplayer actors on a square: robot, factory, pea
+    Actor *a = getWorld()->getActor(getX(), getY(), this); //robot or factory
+    Actor *b = getWorld()->getActor(getX(), getY(), a, this); //if a is robot, b could be factory, and vice versa
+    
+    //1: a is robot, b is factory
+    //2: b factory, a robot
+    //3. a is null, b is factory/wall
+    //4. b is null, a is factory/wall
+    //5. a and b both null
+    
+    //if a is robot, b cannot be robot. check for robots first
+    if (a != nullptr && a->isDamageable()) {
+        a->takeDamage();
+        setAlive(false);
+        return true;
+    } else if (b != nullptr && b->isDamageable()) {
+        b->takeDamage();
+        setAlive(false);
+        return true;
     }
+    //factory/wall check
+    if (a != nullptr && a->canKillPeas()) {
+        setAlive(false);
+        return true;
+    } else if (b != nullptr && b->canKillPeas()) {
+        setAlive(false);
+        return true;
+    }
+    
+    if (getWorld()->isPlayerOn(getX(), getY())) { //same square as player
+        getWorld()->getPlayer()->takeDamage();
+        setAlive(false);
+        return true;
+    }
+    
+    return false;
 }
 
 //*********** WALL ***********//
@@ -103,8 +164,12 @@ void Mortal::takeDamage() {
     if (hitpoints <= 0) setAlive(false);
 }
 
-void Mortal::incHealth(int amt) {
-    hitpoints += amt;
+int Mortal::getHP() {
+    return hitpoints;
+}
+
+void Mortal::setHP(int amt) {
+    hitpoints = amt;
 }
 
 //*********** MARBLE ***********//
@@ -124,9 +189,18 @@ bool Marble::push(int r, int c) {
 //*********** FIGHTER ***********//
 Fighter::Fighter (int hp, int imageID, double startX, double startY, StudentWorld* sWorld): Mortal(hp, imageID, startX, startY, sWorld) {}
 
+void Fighter::shoot(int soundID) {
+    int newX;
+    int newY;
+    getPosInDir(getDirection(), newX, newY);
+    getWorld()->spawnPea(getDirection(), newX, newY);
+    getWorld()->playSound(soundID);
+}
+
 //*********** AVATAR ***********//
 Avatar::Avatar (double startX, double startY, StudentWorld* sWorld) : Fighter(20, IID_PLAYER, startX, startY, sWorld) { //FIXME: not sure about the fighter constructor
     setDirection(right);
+    peaCount = 20;
 }
 
 //FIXME: incomplete
@@ -154,29 +228,22 @@ void Avatar::doSomething() {
                 setDirection(down);
                 if (canMove(down)) moveTo(getX(), getY()-1);
                 break;
+            case KEY_PRESS_SPACE:
+                if (peaCount > 0) {
+                    shoot(SOUND_PLAYER_FIRE);
+                    peaCount--;
+                }
         }
     }
 }
 
 //FIXME: only checks to see if there's something else
 bool Avatar::canMove(int dir) {
-    double newX = getX();
-    double newY = getY();
+    int newX;
+    int newY;
     
-    switch(dir) {
-        case left:
-            newX--;
-            break;
-        case right:
-            newX++;
-            break;
-        case up:
-            newY++;
-            break;
-        case down:
-            newY--;
-            break;
-    }
+    getPosInDir(dir, newX, newY);
+    
     Actor* act = getWorld()->getActor(newX, newY, this);
     if (act != nullptr && act->isDamageable() && !act->canAttack()) { //if it's a marble
         if (makePush(act)) return true; //if marble can be pushed, allow avatar to move
@@ -187,25 +254,23 @@ bool Avatar::canMove(int dir) {
 }
 
 bool Avatar::makePush(Actor *a) {
-    int dir = getDirection();
-    int newX = a->getX();
-    int newY = a->getY();
+    int newX;
+    int newY;
+    a->getPosInDir(getDirection(), newX, newY);
     
-    switch (dir) {
-        case left:
-            newX--;
-            break;
-        case right:
-            newX++;
-            break;
-        case up:
-            newY++;
-            break;
-        case down:
-            newY--;
-            break;
-    }
     if (a->push(newX, newY)) {
         return true;
     } return false;
 }
+
+int Avatar::getPeaCount() {
+    return peaCount;
+}
+
+double Avatar::getHealthPercentage() {
+    double percent = getHP() * 1.0/20;
+    setprecision(2);
+    percent *= 100;
+    return percent;
+}
+

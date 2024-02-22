@@ -20,6 +20,10 @@ GameWorld* createStudentWorld(string assetPath)
 StudentWorld::StudentWorld(string assetPath)
 : GameWorld(assetPath)
 {
+    player = nullptr;
+    levelBonus = 1000;
+    numCrystals = 0;
+    isLevelComplete = false;
 }
 
 int StudentWorld::init()
@@ -31,7 +35,7 @@ int StudentWorld::init()
     if (levelLoad == -1 || getLevel() == 100) return GWSTATUS_PLAYER_WON; //no file or finished lvl99
     if (levelLoad == -2) return GWSTATUS_LEVEL_ERROR;
     
-    levelBonus = 1000; //FIXME: think about moving this to constructor
+    levelBonus = 1000; 
     isLevelComplete = false;
     return GWSTATUS_CONTINUE_GAME;
 }
@@ -83,10 +87,25 @@ Actor* StudentWorld::getActor(int r, int c, Actor* a) {
     return nullptr;
 }
 
+//version to check not equal to two other actors
+Actor* StudentWorld::getActor(int r, int c, Actor* a, Actor* b) {
+    list<Actor*>::iterator it = actorList.begin();
+    while (it != actorList.end()) {
+        if ((*it)->getX() == r && (*it)->getY() == c && ((*it) != a) && ((*it) != b)) //make sure you don't return yourself
+            return *it;
+        it++;
+    }
+    return nullptr;
+}
+
 bool StudentWorld::isPlayerOn(int r, int c) {
     if (player == nullptr) return false;
     if (player->getX() == r && player->getY() == c) return true;
     return false;
+}
+
+Avatar* StudentWorld::getPlayer() {
+    return player;
 }
 
 int StudentWorld::getCrystals() {
@@ -100,7 +119,7 @@ void StudentWorld::decCrystals() {
 void StudentWorld::setLevelComplete(bool complete) {
     isLevelComplete = complete;
 }
-//TODO: not done
+
 void StudentWorld::setDisplayText() {
     
     ostringstream oss;
@@ -110,10 +129,28 @@ void StudentWorld::setDisplayText() {
     oss << "  Level: " << setw(2) << getLevel();
     oss.fill(' ');
     oss << "  Lives: " << setw(2) << getLives();
+    oss << "  Health: " << setw(3) << player->getHealthPercentage() << "%";
+    oss << "  Ammo: " << setw(3) << player->getPeaCount();
     oss << "  Bonus: " << setw(4) << levelBonus;
     
     string s = oss.str();
     setGameStatText(s);
+}
+
+void StudentWorld::spawnPea(int dir, int x, int y) {
+    actorList.push_back(new Pea(dir, x, y, this));
+}
+
+StudentWorld::~StudentWorld() {
+    if (player != nullptr) delete player; //player isn't already deleted
+    player = nullptr;
+    
+    list<Actor*>::iterator it = actorList.begin();
+    while (it != actorList.end()) {
+        Actor* temp = *it;
+        it = actorList.erase(it);
+        delete temp;
+    }
 }
 
 int StudentWorld::loadALevel(string currLevel) {
@@ -169,17 +206,5 @@ void StudentWorld::cleanDeadActors() {
             delete temp;
         }
         else {it++;}
-    }
-}
-
-StudentWorld::~StudentWorld() {
-    if (player != nullptr) delete player; //player isn't already deleted
-    player = nullptr;
-    
-    list<Actor*>::iterator it = actorList.begin();
-    while (it != actorList.end()) {
-        Actor* temp = *it;
-        it = actorList.erase(it);
-        delete temp;
     }
 }
