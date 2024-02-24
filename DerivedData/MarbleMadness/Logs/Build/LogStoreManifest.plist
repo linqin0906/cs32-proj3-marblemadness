@@ -300,6 +300,48 @@
 			<key>uniqueIdentifier</key>
 			<string>1067EE78-4888-4C01-BC06-23BB54488653</string>
 		</dict>
+		<key>1394057E-E27F-471D-82B3-F29B5F527A5C</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>1394057E-E27F-471D-82B3-F29B5F527A5C.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+				<key>totalNumberOfAnalyzerIssues</key>
+				<integer>0</integer>
+				<key>totalNumberOfErrors</key>
+				<integer>0</integer>
+				<key>totalNumberOfTestFailures</key>
+				<integer>0</integer>
+				<key>totalNumberOfWarnings</key>
+				<integer>0</integer>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>MarbleMadness project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>MarbleMadness</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build MarbleMadness</string>
+			<key>timeStartedRecording</key>
+			<real>730441336.40993905</real>
+			<key>timeStoppedRecording</key>
+			<real>730441336.48805499</real>
+			<key>title</key>
+			<string>Build MarbleMadness</string>
+			<key>uniqueIdentifier</key>
+			<string>1394057E-E27F-471D-82B3-F29B5F527A5C</string>
+		</dict>
 		<key>1577C160-0082-4C8B-A554-545D6B3A0DD5</key>
 		<dict>
 			<key>className</key>
@@ -341,6 +383,48 @@
 			<string>Build MarbleMadness</string>
 			<key>uniqueIdentifier</key>
 			<string>1577C160-0082-4C8B-A554-545D6B3A0DD5</string>
+		</dict>
+		<key>1608166F-F22C-43DD-B006-4100C0D27CA7</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>1608166F-F22C-43DD-B006-4100C0D27CA7.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+				<key>totalNumberOfAnalyzerIssues</key>
+				<integer>0</integer>
+				<key>totalNumberOfErrors</key>
+				<integer>0</integer>
+				<key>totalNumberOfTestFailures</key>
+				<integer>0</integer>
+				<key>totalNumberOfWarnings</key>
+				<integer>0</integer>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>MarbleMadness project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>MarbleMadness</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build MarbleMadness</string>
+			<key>timeStartedRecording</key>
+			<real>730442152.51043701</real>
+			<key>timeStoppedRecording</key>
+			<real>730442153.93018699</real>
+			<key>title</key>
+			<string>Build MarbleMadness</string>
+			<key>uniqueIdentifier</key>
+			<string>1608166F-F22C-43DD-B006-4100C0D27CA7</string>
 		</dict>
 		<key>17604745-D3F8-4F06-B84E-376C108CFDFA</key>
 		<dict>
@@ -762,6 +846,48 @@
 			<key>uniqueIdentifier</key>
 			<string>29B21BB4-D974-4114-9A59-A094D9E8B08F</string>
 		</dict>
+		<key>2FAD1BB7-123B-4B99-9713-BA13C0A2E10D</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>2FAD1BB7-123B-4B99-9713-BA13C0A2E10D.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+				<key>totalNumberOfAnalyzerIssues</key>
+				<integer>0</integer>
+				<key>totalNumberOfErrors</key>
+				<integer>0</integer>
+				<key>totalNumberOfTestFailures</key>
+				<integer>0</integer>
+				<key>totalNumberOfWarnings</key>
+				<integer>0</integer>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>MarbleMadness project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>MarbleMadness</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build MarbleMadness</string>
+			<key>timeStartedRecording</key>
+			<real>730441923.73092794</real>
+			<key>timeStoppedRecording</key>
+			<real>730441923.80151403</real>
+			<key>title</key>
+			<string>Build MarbleMadness</string>
+			<key>uniqueIdentifier</key>
+			<string>2FAD1BB7-123B-4B99-9713-BA13C0A2E10D</string>
+		</dict>
 		<key>3108D76E-ED78-4D42-85F3-4158201ED5EE</key>
 		<dict>
 			<key>className</key>
@@ -1139,6 +1265,48 @@
 			<string>Build MarbleMadness</string>
 			<key>uniqueIdentifier</key>
 			<string>3D0284CB-9C39-48D4-BD1F-5C7D76229046</string>
+		</dict>
+		<key>3D97BB00-C0CA-4034-9F8F-81A2D68F5A4A</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>3D97BB00-C0CA-4034-9F8F-81A2D68F5A4A.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+				<key>totalNumberOfAnalyzerIssues</key>
+				<integer>0</integer>
+				<key>totalNumberOfErrors</key>
+				<integer>0</integer>
+				<key>totalNumberOfTestFailures</key>
+				<integer>0</integer>
+				<key>totalNumberOfWarnings</key>
+				<integer>0</integer>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>MarbleMadness project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>MarbleMadness</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build MarbleMadness</string>
+			<key>timeStartedRecording</key>
+			<real>730442238.82558203</real>
+			<key>timeStoppedRecording</key>
+			<real>730442238.90403199</real>
+			<key>title</key>
+			<string>Build MarbleMadness</string>
+			<key>uniqueIdentifier</key>
+			<string>3D97BB00-C0CA-4034-9F8F-81A2D68F5A4A</string>
 		</dict>
 		<key>40CF66FA-C542-40BC-9AAC-2BCA91997DE4</key>
 		<dict>
@@ -1728,6 +1896,48 @@
 			<key>uniqueIdentifier</key>
 			<string>5F551840-5461-4762-B146-DA81A58445C8</string>
 		</dict>
+		<key>5F6D236D-C882-45F9-A8BB-C507FE13AC5D</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>5F6D236D-C882-45F9-A8BB-C507FE13AC5D.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+				<key>totalNumberOfAnalyzerIssues</key>
+				<integer>0</integer>
+				<key>totalNumberOfErrors</key>
+				<integer>0</integer>
+				<key>totalNumberOfTestFailures</key>
+				<integer>0</integer>
+				<key>totalNumberOfWarnings</key>
+				<integer>0</integer>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>MarbleMadness project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>MarbleMadness</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build MarbleMadness</string>
+			<key>timeStartedRecording</key>
+			<real>730441482.93890202</real>
+			<key>timeStoppedRecording</key>
+			<real>730441483.02426004</real>
+			<key>title</key>
+			<string>Build MarbleMadness</string>
+			<key>uniqueIdentifier</key>
+			<string>5F6D236D-C882-45F9-A8BB-C507FE13AC5D</string>
+		</dict>
 		<key>5FD25CE3-1F5B-45B2-AD5E-DC8BE0D4242B</key>
 		<dict>
 			<key>className</key>
@@ -1938,6 +2148,48 @@
 			<key>uniqueIdentifier</key>
 			<string>6F6826D9-66D7-4905-814F-6BDB6E98E97B</string>
 		</dict>
+		<key>73029D87-49E0-4604-A1CA-CF5ED8BC1CE1</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>73029D87-49E0-4604-A1CA-CF5ED8BC1CE1.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+				<key>totalNumberOfAnalyzerIssues</key>
+				<integer>0</integer>
+				<key>totalNumberOfErrors</key>
+				<integer>0</integer>
+				<key>totalNumberOfTestFailures</key>
+				<integer>0</integer>
+				<key>totalNumberOfWarnings</key>
+				<integer>0</integer>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>MarbleMadness project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>MarbleMadness</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build MarbleMadness</string>
+			<key>timeStartedRecording</key>
+			<real>730441375.87161601</real>
+			<key>timeStoppedRecording</key>
+			<real>730441377.04533005</real>
+			<key>title</key>
+			<string>Build MarbleMadness</string>
+			<key>uniqueIdentifier</key>
+			<string>73029D87-49E0-4604-A1CA-CF5ED8BC1CE1</string>
+		</dict>
 		<key>7328703B-CCE1-477F-9A1B-74BEA9B05F3F</key>
 		<dict>
 			<key>className</key>
@@ -1979,6 +2231,48 @@
 			<string>Build MarbleMadness</string>
 			<key>uniqueIdentifier</key>
 			<string>7328703B-CCE1-477F-9A1B-74BEA9B05F3F</string>
+		</dict>
+		<key>7703DBCB-6B75-4D46-B3BC-4A127A0EF3EB</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>7703DBCB-6B75-4D46-B3BC-4A127A0EF3EB.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+				<key>totalNumberOfAnalyzerIssues</key>
+				<integer>0</integer>
+				<key>totalNumberOfErrors</key>
+				<integer>0</integer>
+				<key>totalNumberOfTestFailures</key>
+				<integer>0</integer>
+				<key>totalNumberOfWarnings</key>
+				<integer>0</integer>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>MarbleMadness project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>MarbleMadness</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build MarbleMadness</string>
+			<key>timeStartedRecording</key>
+			<real>730441310.755427</real>
+			<key>timeStoppedRecording</key>
+			<real>730441310.80889904</real>
+			<key>title</key>
+			<string>Build MarbleMadness</string>
+			<key>uniqueIdentifier</key>
+			<string>7703DBCB-6B75-4D46-B3BC-4A127A0EF3EB</string>
 		</dict>
 		<key>7A368105-6C1A-4259-B906-CD3FFC6BDB48</key>
 		<dict>
@@ -2274,6 +2568,48 @@
 			<key>uniqueIdentifier</key>
 			<string>8748A7C6-37C2-4C72-A043-DD65A1213ED4</string>
 		</dict>
+		<key>8A8C402C-781F-4499-9C77-C112C7DDFA69</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>8A8C402C-781F-4499-9C77-C112C7DDFA69.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+				<key>totalNumberOfAnalyzerIssues</key>
+				<integer>0</integer>
+				<key>totalNumberOfErrors</key>
+				<integer>0</integer>
+				<key>totalNumberOfTestFailures</key>
+				<integer>0</integer>
+				<key>totalNumberOfWarnings</key>
+				<integer>0</integer>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>MarbleMadness project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>MarbleMadness</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build MarbleMadness</string>
+			<key>timeStartedRecording</key>
+			<real>730442513.27414405</real>
+			<key>timeStoppedRecording</key>
+			<real>730442513.36006606</real>
+			<key>title</key>
+			<string>Build MarbleMadness</string>
+			<key>uniqueIdentifier</key>
+			<string>8A8C402C-781F-4499-9C77-C112C7DDFA69</string>
+		</dict>
 		<key>8E1D4838-E056-4F73-8537-EFE5D6E2CDAF</key>
 		<dict>
 			<key>className</key>
@@ -2483,6 +2819,90 @@
 			<string>Build MarbleMadness</string>
 			<key>uniqueIdentifier</key>
 			<string>9701D84B-0896-4144-9DA4-50F6460315D6</string>
+		</dict>
+		<key>98BFDD8E-7B4F-48F5-AE16-68F8C4FE5CE4</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>98BFDD8E-7B4F-48F5-AE16-68F8C4FE5CE4.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+				<key>totalNumberOfAnalyzerIssues</key>
+				<integer>0</integer>
+				<key>totalNumberOfErrors</key>
+				<integer>0</integer>
+				<key>totalNumberOfTestFailures</key>
+				<integer>0</integer>
+				<key>totalNumberOfWarnings</key>
+				<integer>0</integer>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>MarbleMadness project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>MarbleMadness</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build MarbleMadness</string>
+			<key>timeStartedRecording</key>
+			<real>730441888.98339701</real>
+			<key>timeStoppedRecording</key>
+			<real>730441889.05561304</real>
+			<key>title</key>
+			<string>Build MarbleMadness</string>
+			<key>uniqueIdentifier</key>
+			<string>98BFDD8E-7B4F-48F5-AE16-68F8C4FE5CE4</string>
+		</dict>
+		<key>9FBF558F-A882-416A-87FB-4715317C0769</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>9FBF558F-A882-416A-87FB-4715317C0769.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+				<key>totalNumberOfAnalyzerIssues</key>
+				<integer>0</integer>
+				<key>totalNumberOfErrors</key>
+				<integer>0</integer>
+				<key>totalNumberOfTestFailures</key>
+				<integer>0</integer>
+				<key>totalNumberOfWarnings</key>
+				<integer>0</integer>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>MarbleMadness project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>MarbleMadness</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build MarbleMadness</string>
+			<key>timeStartedRecording</key>
+			<real>730441276.47629297</real>
+			<key>timeStoppedRecording</key>
+			<real>730441277.94507897</real>
+			<key>title</key>
+			<string>Build MarbleMadness</string>
+			<key>uniqueIdentifier</key>
+			<string>9FBF558F-A882-416A-87FB-4715317C0769</string>
 		</dict>
 		<key>A18D44DD-199C-4DAE-A98E-64F338374E5D</key>
 		<dict>
@@ -2694,6 +3114,48 @@
 			<key>uniqueIdentifier</key>
 			<string>A58CD223-9B9C-4E8C-B3DA-3B8460DB5A8E</string>
 		</dict>
+		<key>AFC414B4-187C-4E7E-8E1B-316F4D5D5BFC</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>AFC414B4-187C-4E7E-8E1B-316F4D5D5BFC.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+				<key>totalNumberOfAnalyzerIssues</key>
+				<integer>0</integer>
+				<key>totalNumberOfErrors</key>
+				<integer>0</integer>
+				<key>totalNumberOfTestFailures</key>
+				<integer>0</integer>
+				<key>totalNumberOfWarnings</key>
+				<integer>0</integer>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>MarbleMadness project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>MarbleMadness</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build MarbleMadness</string>
+			<key>timeStartedRecording</key>
+			<real>730442749.01625597</real>
+			<key>timeStoppedRecording</key>
+			<real>730442749.10947502</real>
+			<key>title</key>
+			<string>Build MarbleMadness</string>
+			<key>uniqueIdentifier</key>
+			<string>AFC414B4-187C-4E7E-8E1B-316F4D5D5BFC</string>
+		</dict>
 		<key>B0151603-6B4F-4367-8367-23B6E7F1D506</key>
 		<dict>
 			<key>className</key>
@@ -2820,6 +3282,90 @@
 			<key>uniqueIdentifier</key>
 			<string>B5806805-A58B-41B4-962D-D819047DDD4C</string>
 		</dict>
+		<key>B5E89662-AE51-4284-AAFE-B68CC7655AD2</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>B5E89662-AE51-4284-AAFE-B68CC7655AD2.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+				<key>totalNumberOfAnalyzerIssues</key>
+				<integer>0</integer>
+				<key>totalNumberOfErrors</key>
+				<integer>0</integer>
+				<key>totalNumberOfTestFailures</key>
+				<integer>0</integer>
+				<key>totalNumberOfWarnings</key>
+				<integer>0</integer>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>MarbleMadness project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>MarbleMadness</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build MarbleMadness</string>
+			<key>timeStartedRecording</key>
+			<real>730442315.26587498</real>
+			<key>timeStoppedRecording</key>
+			<real>730442315.32723296</real>
+			<key>title</key>
+			<string>Build MarbleMadness</string>
+			<key>uniqueIdentifier</key>
+			<string>B5E89662-AE51-4284-AAFE-B68CC7655AD2</string>
+		</dict>
+		<key>B952BB04-C44D-4825-8FDC-1B5FB08FCAF7</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>B952BB04-C44D-4825-8FDC-1B5FB08FCAF7.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+				<key>totalNumberOfAnalyzerIssues</key>
+				<integer>0</integer>
+				<key>totalNumberOfErrors</key>
+				<integer>0</integer>
+				<key>totalNumberOfTestFailures</key>
+				<integer>0</integer>
+				<key>totalNumberOfWarnings</key>
+				<integer>0</integer>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>MarbleMadness project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>MarbleMadness</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build MarbleMadness</string>
+			<key>timeStartedRecording</key>
+			<real>730441407.57988405</real>
+			<key>timeStoppedRecording</key>
+			<real>730441407.79069102</real>
+			<key>title</key>
+			<string>Build MarbleMadness</string>
+			<key>uniqueIdentifier</key>
+			<string>B952BB04-C44D-4825-8FDC-1B5FB08FCAF7</string>
+		</dict>
 		<key>BB1B08F2-7EE5-4822-A568-F7D4E26F22FC</key>
 		<dict>
 			<key>className</key>
@@ -2945,6 +3491,90 @@
 			<string>Build MarbleMadness</string>
 			<key>uniqueIdentifier</key>
 			<string>C19F803C-4BFF-45DA-B2CA-4F8C0C3EE43D</string>
+		</dict>
+		<key>C27090F1-8F3E-47C5-ADB0-D71449F64CDC</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>C27090F1-8F3E-47C5-ADB0-D71449F64CDC.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+				<key>totalNumberOfAnalyzerIssues</key>
+				<integer>0</integer>
+				<key>totalNumberOfErrors</key>
+				<integer>0</integer>
+				<key>totalNumberOfTestFailures</key>
+				<integer>0</integer>
+				<key>totalNumberOfWarnings</key>
+				<integer>0</integer>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>MarbleMadness project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>MarbleMadness</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build MarbleMadness</string>
+			<key>timeStartedRecording</key>
+			<real>730442767.398857</real>
+			<key>timeStoppedRecording</key>
+			<real>730442767.45425606</real>
+			<key>title</key>
+			<string>Build MarbleMadness</string>
+			<key>uniqueIdentifier</key>
+			<string>C27090F1-8F3E-47C5-ADB0-D71449F64CDC</string>
+		</dict>
+		<key>C622BB2D-CE6C-4B1A-91C8-B834298777FD</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>C622BB2D-CE6C-4B1A-91C8-B834298777FD.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+				<key>totalNumberOfAnalyzerIssues</key>
+				<integer>0</integer>
+				<key>totalNumberOfErrors</key>
+				<integer>0</integer>
+				<key>totalNumberOfTestFailures</key>
+				<integer>0</integer>
+				<key>totalNumberOfWarnings</key>
+				<integer>0</integer>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>MarbleMadness project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>MarbleMadness</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build MarbleMadness</string>
+			<key>timeStartedRecording</key>
+			<real>730442291.66268694</real>
+			<key>timeStoppedRecording</key>
+			<real>730442291.856215</real>
+			<key>title</key>
+			<string>Build MarbleMadness</string>
+			<key>uniqueIdentifier</key>
+			<string>C622BB2D-CE6C-4B1A-91C8-B834298777FD</string>
 		</dict>
 		<key>C7FBC8D4-9F09-4421-BDB3-0073894ABBCF</key>
 		<dict>
@@ -3365,6 +3995,48 @@
 			<string>Build MarbleMadness</string>
 			<key>uniqueIdentifier</key>
 			<string>E26A81EA-A38A-4CF6-B18F-D3AA14FBC7EB</string>
+		</dict>
+		<key>EB6A3535-244D-4F93-AB16-27939C409C8D</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>EB6A3535-244D-4F93-AB16-27939C409C8D.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+				<key>totalNumberOfAnalyzerIssues</key>
+				<integer>0</integer>
+				<key>totalNumberOfErrors</key>
+				<integer>0</integer>
+				<key>totalNumberOfTestFailures</key>
+				<integer>0</integer>
+				<key>totalNumberOfWarnings</key>
+				<integer>0</integer>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>MarbleMadness project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>MarbleMadness</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build MarbleMadness</string>
+			<key>timeStartedRecording</key>
+			<real>730441627.27584696</real>
+			<key>timeStoppedRecording</key>
+			<real>730441627.35674</real>
+			<key>title</key>
+			<string>Build MarbleMadness</string>
+			<key>uniqueIdentifier</key>
+			<string>EB6A3535-244D-4F93-AB16-27939C409C8D</string>
 		</dict>
 		<key>ED14CFDB-869E-4839-9084-0FAC5ACF35C1</key>
 		<dict>

@@ -86,11 +86,11 @@ bool Pea::makeWarAndPeas() { //max 3 nonplayer actors on a square: robot, factor
     
     //if a is robot, b cannot be robot. check for robots first
     if (a != nullptr && a->isDamageable()) {
-        a->takeDamage();
+        a->takeDamage(SOUND_ROBOT_IMPACT, SOUND_ROBOT_DIE);
         setAlive(false);
         return true;
     } else if (b != nullptr && b->isDamageable()) {
-        b->takeDamage();
+        b->takeDamage(SOUND_ROBOT_IMPACT, SOUND_ROBOT_DIE);
         setAlive(false);
         return true;
     }
@@ -104,7 +104,7 @@ bool Pea::makeWarAndPeas() { //max 3 nonplayer actors on a square: robot, factor
     }
     
     if (getWorld()->isPlayerOn(getX(), getY())) { //same square as player
-        getWorld()->getPlayer()->takeDamage();
+        getWorld()->getPlayer()->takeDamage(SOUND_PLAYER_IMPACT, SOUND_PLAYER_DIE);
         setAlive(false);
         return true;
     }
@@ -159,9 +159,17 @@ Mortal::Mortal(int hp, int imageID, double startX, double startY, StudentWorld* 
     hitpoints = hp;
 }
 
-void Mortal::takeDamage() {
+void Mortal::takeDamage(int soundImpact, int soundDeath) {
     hitpoints -= 2;
-    if (hitpoints <= 0) setAlive(false);
+    if (hitpoints <= 0) {
+        setAlive(false);
+        if (soundDeath != -1) getWorld()->playSound(soundDeath);
+        return;
+    }
+    if (soundImpact != -1) {
+        std::cerr << "sound played?";
+        getWorld()->playSound(soundImpact);
+    }
 }
 
 int Mortal::getHP() {

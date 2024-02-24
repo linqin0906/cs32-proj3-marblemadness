@@ -20,7 +20,7 @@ class Actor: public GraphObject {
         virtual bool canReceive() {return false;}
         virtual bool canAttack() {return false;}
         virtual bool push(int r, int c) {return false;} //returns false if not pushable
-        virtual void takeDamage() {} //does nothing if not Mortal
+        virtual void takeDamage(int soundImpact, int soundDeath) {} //does nothing if not Mortal
         bool isAlive();
         void setAlive(bool alive);
         StudentWorld* getWorld();
@@ -64,7 +64,7 @@ class Mortal: public Actor {
         Mortal(int hp, int imageID, double startX, double startY, StudentWorld* sWorld);
         virtual void doSomething() = 0;
         virtual bool isDamageable() {return true;}
-        virtual void takeDamage();
+        virtual void takeDamage(int soundImpact, int soundDeath);
         int getHP();
         void setHP(int amt);
     private:
