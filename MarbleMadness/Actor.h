@@ -105,7 +105,7 @@ class Avatar: public Fighter {
 // *********** ROBOT *********** //
 class Robot: public Fighter {
     public:
-        Robot(int ticks, int hp, int imageID, double startX, double startY, StudentWorld* sWorld);
+        Robot(int hp, int imageID, double startX, double startY, StudentWorld* sWorld);
         virtual void doSomething() = 0;
         bool canTakeAction();
         void incTick();
@@ -119,7 +119,7 @@ class Robot: public Fighter {
 // *********** RAGEBOT *********** //
 class RageBot: public Robot {
     public:
-        RageBot(int dir, int ticks, double startX, double startY, StudentWorld* sWorld);
+        RageBot(int dir, double startX, double startY, StudentWorld* sWorld);
         virtual void doSomething();
 };
 

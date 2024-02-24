@@ -30,8 +30,10 @@ int StudentWorld::init()
 {
     numCrystals = 0; //needs to be here bc loadALevel adds crystals
 
-    int levelLoad = loadALevel("level0" + to_string(getLevel()) + ".txt");
-    
+//    int levelLoad = loadALevel("level0" + to_string(getLevel()) + ".txt");
+
+    int levelLoad = loadALevel("level01.txt");
+
     if (levelLoad == -1 || getLevel() == 100) return GWSTATUS_PLAYER_WON; //no file or finished lvl99
     if (levelLoad == -2) return GWSTATUS_LEVEL_ERROR;
     
@@ -138,7 +140,7 @@ void StudentWorld::setDisplayText() {
 }
 
 void StudentWorld::spawnPea(int dir, int x, int y) {
-    actorList.push_back(new Pea(dir, x, y, this));
+    actorList.push_front(new Pea(dir, x, y, this));
 }
 
 int StudentWorld::computeTicks() {
@@ -184,13 +186,12 @@ int StudentWorld::loadALevel(string currLevel) {
                 actorList.push_back(new Marble(r, c, this));
             else if (item == Level::pit)
                 actorList.push_back(new Pit(r, c, this));
-            else if (item == Level::horiz_ragebot) {
-                actorList.push_back(new RageBot(0, computeTicks(), r, c, this));
-            } else if (item == Level::vert_ragebot)
-                actorList.push_back(new RageBot(270, computeTicks(), r, c, this));
+            else if (item == Level::horiz_ragebot)
+                actorList.push_back(new RageBot(0, r, c, this));
+            else if (item == Level::vert_ragebot)
+                actorList.push_back(new RageBot(270, r, c, this));
         }
     }
-    
     return 0;
 }
 

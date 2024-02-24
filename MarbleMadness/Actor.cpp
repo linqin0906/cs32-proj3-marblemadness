@@ -30,7 +30,7 @@ void Actor::setAlive(bool alive) {
 void Actor::getPosInDir(int dir, int& newX, int& newY) {
     int currX = getX();
     int currY = getY();
-    
+        
     switch(dir) {
         case left:
             currX--;
@@ -167,7 +167,6 @@ void Mortal::takeDamage(int soundImpact, int soundDeath) {
         return;
     }
     if (soundImpact != -1) {
-        std::cerr << "sound played?";
         getWorld()->playSound(soundImpact);
     }
 }
@@ -212,9 +211,10 @@ bool Fighter::canMove(int dir) {
     getPosInDir(dir, newX, newY);
     
     Actor* act = getWorld()->getActor(newX, newY, this);
-    
     //if act is wall/factory, pit, or robot
-    if (act != nullptr && (act->canKillPeas() || act->canReceive() || (act->canAttack() && !act->canScore()))) return false;
+    if (act != nullptr && (act->canKillPeas() || act->canReceive() || (act->canAttack() && !act->canScore()))) {
+        return false;
+    }
     
     return true;
 }
@@ -300,7 +300,7 @@ double Avatar::getHealthPercentage() {
 }
 
 //*********** ROBOT ***********//
-Robot::Robot(int ticks, int hp, int imageID, double startX, double startY, StudentWorld* sWorld) : Fighter (hp, imageID, startX, startY, sWorld) {
+Robot::Robot(int hp, int imageID, double startX, double startY, StudentWorld* sWorld) : Fighter (hp, imageID, startX, startY, sWorld) {
     tickCount = 0;
 }
 
@@ -362,18 +362,18 @@ bool Robot::canFire() {
 
 bool Robot::canMove(int dir) {
     if (!Fighter::canMove(dir)) return false;
-    
     int newX, newY;
     getPosInDir(dir, newX, newY);
     if (getWorld()->isPlayerOn(newX, newY)) return false;
     Actor* a = getWorld()->getActor(newX, newY, this);
-    if (a != nullptr && a->isDamageable() && !a->canAttack()) return false; //is marble
-    
+    if (a != nullptr && a->isDamageable() && !a->canAttack()) {
+        return false; //is marble
+    }
     return true;
 }
 
 //*********** RAGEBOT ***********//
-RageBot::RageBot(int dir, int ticks, double startX, double startY, StudentWorld* sWorld) : Robot(ticks, 10, IID_RAGEBOT, startX, startY, sWorld){
+RageBot::RageBot(int dir, double startX, double startY, StudentWorld* sWorld) : Robot(10, IID_RAGEBOT, startX, startY, sWorld){
     setDirection(dir);
 }
 
@@ -389,7 +389,9 @@ void RageBot::doSomething() {
         return;
     }
     if (canMove(getDirection())) {
-        moveForward();
+        int newX, newY;
+        getPosInDir(getDirection(), newX, newY);
+        moveTo(newX, newY);
     } else {
         int dir = getDirection();
         switch (dir) {
