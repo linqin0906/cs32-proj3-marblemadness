@@ -28,14 +28,14 @@ StudentWorld::StudentWorld(string assetPath)
 
 int StudentWorld::init()
 {
-    numCrystals = 0;
+    numCrystals = 0; //needs to be here bc loadALevel adds crystals
 
     int levelLoad = loadALevel("level0" + to_string(getLevel()) + ".txt");
     
     if (levelLoad == -1 || getLevel() == 100) return GWSTATUS_PLAYER_WON; //no file or finished lvl99
     if (levelLoad == -2) return GWSTATUS_LEVEL_ERROR;
     
-    levelBonus = 1000; 
+    levelBonus = 1000;
     isLevelComplete = false;
     return GWSTATUS_CONTINUE_GAME;
 }
@@ -141,6 +141,12 @@ void StudentWorld::spawnPea(int dir, int x, int y) {
     actorList.push_back(new Pea(dir, x, y, this));
 }
 
+int StudentWorld::computeTicks() {
+    int ticks = (28 - getLevel())/4; // level number (0, 1, 2, etc.)
+    if (ticks < 3) ticks = 3;
+    return ticks;
+}
+
 StudentWorld::~StudentWorld() {
     if (player != nullptr) delete player; //player isn't already deleted
     player = nullptr;
@@ -178,6 +184,10 @@ int StudentWorld::loadALevel(string currLevel) {
                 actorList.push_back(new Marble(r, c, this));
             else if (item == Level::pit)
                 actorList.push_back(new Pit(r, c, this));
+            else if (item == Level::horiz_ragebot) {
+                actorList.push_back(new RageBot(0, computeTicks(), r, c, this));
+            } else if (item == Level::vert_ragebot)
+                actorList.push_back(new RageBot(270, computeTicks(), r, c, this));
         }
     }
     

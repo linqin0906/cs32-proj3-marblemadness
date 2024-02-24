@@ -197,6 +197,21 @@ void Fighter::shoot(int soundID) {
     getWorld()->playSound(soundID);
 }
 
+bool Fighter::canMove(int dir) {
+    int newX;
+    int newY;
+    
+    getPosInDir(dir, newX, newY);
+    
+    Actor* act = getWorld()->getActor(newX, newY, this);
+    
+    //if act is wall/factory, pit, or robot
+    if (act != nullptr && (act->canKillPeas() || act->canReceive() || (act->canAttack() && !act->canScore()))) return false;
+    
+    return true;
+}
+
+
 //*********** AVATAR ***********//
 Avatar::Avatar (double startX, double startY, StudentWorld* sWorld) : Fighter(20, IID_PLAYER, startX, startY, sWorld) { //FIXME: not sure about the fighter constructor
     setDirection(right);
@@ -239,17 +254,19 @@ void Avatar::doSomething() {
 
 //FIXME: only checks to see if there's something else
 bool Avatar::canMove(int dir) {
+    if (!Fighter::canMove(dir)) return false;
+    
     int newX;
     int newY;
-    
     getPosInDir(dir, newX, newY);
     
     Actor* act = getWorld()->getActor(newX, newY, this);
+
     if (act != nullptr && act->isDamageable() && !act->canAttack()) { //if it's a marble
         if (makePush(act)) return true; //if marble can be pushed, allow avatar to move
         else {return false;}
     }
-    if (act != nullptr && !act->isCollectable()) return false;
+    
     return true;
 }
 
@@ -272,5 +289,111 @@ double Avatar::getHealthPercentage() {
     setprecision(2);
     percent *= 100;
     return percent;
+}
+
+//*********** ROBOT ***********//
+Robot::Robot(int ticks, int hp, int imageID, double startX, double startY, StudentWorld* sWorld) : Fighter (hp, imageID, startX, startY, sWorld) {
+    tickCount = 0;
+}
+
+bool Robot::canTakeAction() {
+
+    if (tickCount % (getWorld()->computeTicks()) == 0) {
+        tickCount = 0;
+        return true;
+    }
+    return false;
+}
+
+void Robot::incTick() {
+    tickCount++;
+}
+
+int Robot::getTickCount() {
+    return tickCount;
+}
+
+bool Robot::canFire() {
+    int dir = getDirection();
+    switch(dir) {
+        case up:
+            for (int y = getY() + 1; y < 15; y++) {
+                if (getWorld()->isPlayerOn(getX(), y)) return true; //player found w/o obstacles
+                Actor* a = getWorld()->getActor(getX(), y, this);
+                if (a != nullptr) {
+                    if (a->canKillPeas() || (a->isDamageable() && !a->canAttack()) || (a->isDamageable() && !a->canScore())) return false;
+                }
+            } break;
+        case right:
+            for (int x = getX() + 1; x < 15; x++) {
+                if (getWorld()->isPlayerOn(x, getY())) return true; //player found w/o obstacles
+                Actor* a = getWorld()->getActor(x, getY(), this);
+                if (a != nullptr) {
+                    if (a->canKillPeas() || (a->isDamageable() && !a->canAttack()) || (a->isDamageable() && !a->canScore())) return false;
+                }
+            } break;
+        case down:
+            for (int y = getY() - 1; y >= 0; y--) {
+                if (getWorld()->isPlayerOn(getX(), y)) return true; //player found w/o obstacles
+                Actor* a = getWorld()->getActor(getX(), y, this);
+                if (a != nullptr) {
+                    if (a->canKillPeas() || (a->isDamageable() && !a->canAttack()) || (a->isDamageable() && !a->canScore())) return false;
+                }
+            } break;
+        case left:
+            for (int x = getX() - 1; x >= 0; x--) {
+                if (getWorld()->isPlayerOn(x, getY())) return true; //player found w/o obstacles
+                Actor* a = getWorld()->getActor(x, getY(), this);
+                if (a != nullptr) {
+                    if (a->canKillPeas() || (a->isDamageable() && !a->canAttack()) || (a->isDamageable() && !a->canScore())) return false;
+                }
+            } break;
+    }
+    return false; //should never get here
+}
+
+bool Robot::canMove(int dir) {
+    if (!Fighter::canMove(dir)) return false;
+    
+    int newX, newY;
+    getPosInDir(dir, newX, newY);
+    if (getWorld()->isPlayerOn(newX, newY)) return false;
+    Actor* a = getWorld()->getActor(newX, newY, this);
+    if (a != nullptr && a->isDamageable() && !a->canAttack()) return false; //is marble
+    
+    return true;
+}
+
+//*********** RAGEBOT ***********//
+RageBot::RageBot(int dir, int ticks, double startX, double startY, StudentWorld* sWorld) : Robot(ticks, 10, IID_RAGEBOT, startX, startY, sWorld){
+    setDirection(dir);
+}
+
+void RageBot::doSomething() {
+    if (!isAlive()) return;
+    if (!canTakeAction()) {
+        incTick();
+        return;
+    }
+    incTick();
+    if (canFire()) {
+        shoot(SOUND_ENEMY_FIRE);
+        return;
+    }
+    if (canMove(getDirection())) {
+        moveForward();
+    } else {
+        int dir = getDirection();
+        switch (dir) {
+            case up:
+                setDirection(down); break;
+            case down:
+                setDirection(up); break;
+            case left:
+                setDirection(right); break;
+            case right:
+                setDirection(left); break;
+        }
+    }
 }
 

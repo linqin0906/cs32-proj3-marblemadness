@@ -85,8 +85,10 @@ class Fighter: public Mortal {
         Fighter(int hp, int imageID, double startX, double startY, StudentWorld* sWorld);
         virtual bool canAttack() {return true;}
         void shoot(int soundID);
+        virtual bool canMove(int dir);
 };
 
+// *********** AVATAR *********** //
 class Avatar: public Fighter {
     public:
         Avatar(double startX, double startY, StudentWorld* sWorld);
@@ -95,9 +97,30 @@ class Avatar: public Fighter {
         bool makePush(Actor* a);
         int getPeaCount();
         double getHealthPercentage();
+        virtual bool canMove(int dir);
     private:
-        bool canMove(int dir);
         int peaCount;
+};
+
+// *********** ROBOT *********** //
+class Robot: public Fighter {
+    public:
+        Robot(int ticks, int hp, int imageID, double startX, double startY, StudentWorld* sWorld);
+        virtual void doSomething() = 0;
+        bool canTakeAction();
+        void incTick();
+        int getTickCount();
+        bool canFire();
+        virtual bool canMove(int dir);
+    private:
+        int tickCount;
+};
+
+// *********** RAGEBOT *********** //
+class RageBot: public Robot {
+    public:
+        RageBot(int dir, int ticks, double startX, double startY, StudentWorld* sWorld);
+        virtual void doSomething();
 };
 
 // *********** COLLECTABLES *********** //

@@ -26,12 +26,13 @@ public:
     int getCrystals();
     void decCrystals();
     void setLevelComplete(bool complete);
-    void setDisplayText();
-        void spawnPea(int dir, int x, int y);
+    void spawnPea(int dir, int x, int y);
+    int computeTicks();
 
     ~StudentWorld();
     
 private:
+    void setDisplayText();
     int loadALevel(std::string currLevel);
     void cleanDeadActors();
     bool everyoneDoSomething();
