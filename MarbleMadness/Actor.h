@@ -19,6 +19,7 @@ class Actor: public GraphObject {
         virtual bool canKillPeas() {return false;}
         virtual bool canReceive() {return false;}
         virtual bool canAttack() {return false;}
+        virtual bool isThievable() {return false;}
         virtual bool push(int r, int c) {return false;} //returns false if not pushable
         virtual void takeDamage(int soundImpact, int soundDeath) {} //does nothing if not Mortal
         bool isAlive();
@@ -121,6 +122,32 @@ class RageBot: public Robot {
     public:
         RageBot(int dir, double startX, double startY, StudentWorld* sWorld);
         virtual void doSomething();
+        virtual void takeDamage(int soundImpact, int soundDeath);
+};
+
+// *********** THIEFBOT *********** //
+class ThiefBot: public Robot {
+    public:
+        ThiefBot(int hp, int imageID, double startX, double startY, StudentWorld* sWorld);
+        virtual void doSomething();
+        virtual void takeDamage(int soundImpact, int soundDeath);
+        int getSquaresMoved();
+        int getDistBeforeTurn();
+        void incSquares();
+    private:
+        void setDistanceBeforeTurning();
+        bool setRandDirectionAndMove();
+        int distBeforeTurn;
+        int squaresMoved;
+        bool hasThieved;
+        Actor* goodie;
+};
+
+class MeanThiefBot: public ThiefBot {
+    public:
+        MeanThiefBot(double startX, double startY, StudentWorld* sWorld);
+        virtual void doSomething();
+        virtual void takeDamage(int soundImpact, int soundDeath);
 };
 
 // *********** COLLECTABLES *********** //
@@ -129,7 +156,7 @@ class Collectable: public Actor {
         Collectable(int imageID, double startX, double startY, StudentWorld* sWorld);
         virtual void doSomething() = 0;
         virtual bool isCollectable() {return true;}
-        void beCollected(int points, int soundID);
+        void beCollected(int points, int soundID=SOUND_GOT_GOODIE);
 };
 
 class Crystal: public Collectable {
@@ -143,6 +170,20 @@ class Exit: public Collectable {
         Exit(double startX, double startY, StudentWorld* sWorld);
         virtual void doSomething();
 };
+
+class Goodie: public Collectable {
+    public:
+        Goodie(int imageID, double startX, double startY, StudentWorld* sWorld);
+        virtual void doSomething()=0;
+        virtual bool isThievable() {return true;}
+};
+
+class ExtraLife: public Goodie {
+    public:
+        ExtraLife(double startX, double startY, StudentWorld* sWorld);
+        virtual void doSomething();
+};
+
 
 
 #endif // ACTOR_H_

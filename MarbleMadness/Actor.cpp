@@ -132,7 +132,7 @@ Crystal::Crystal (double startX, double startY, StudentWorld* sWorld): Collectab
 void Crystal::doSomething() {
     if (!isAlive()) return;
     if (getWorld()->isPlayerOn(getX(), getY())) {
-        beCollected(50, SOUND_GOT_GOODIE);
+        beCollected(50);
         getWorld()->decCrystals();
     }
 }
@@ -151,6 +151,21 @@ void Exit::doSomething() {
     if (getWorld()->isPlayerOn(getX(), getY()) && isVisible() && getWorld()->getCrystals()==0) {
         beCollected(2000, SOUND_FINISHED_LEVEL);
         getWorld()->setLevelComplete(true);
+    }
+}
+
+//*********** GOODIE ***********//
+Goodie::Goodie(int imageID, double startX, double startY, StudentWorld* sWorld): Collectable(imageID, startX, startY, sWorld) {}
+
+//*********** EXTRALIFE ***********//
+ExtraLife::ExtraLife(double startX, double startY, StudentWorld* sWorld): Goodie(IID_EXTRA_LIFE, startX, startY, sWorld) {}
+
+void ExtraLife::doSomething() {
+    if (!isAlive()) return;
+    if (!isVisible()) return;
+    if (getWorld()->isPlayerOn(getX(), getY())) {
+        beCollected(1000);
+        getWorld()->incLives();
     }
 }
 
@@ -218,7 +233,6 @@ bool Fighter::canMove(int dir) {
     
     return true;
 }
-
 
 //*********** AVATAR ***********//
 Avatar::Avatar (double startX, double startY, StudentWorld* sWorld) : Fighter(20, IID_PLAYER, startX, startY, sWorld) { //FIXME: not sure about the fighter constructor
@@ -407,3 +421,156 @@ void RageBot::doSomething() {
     }
 }
 
+void RageBot::takeDamage(int soundImpact, int soundDeath) {
+    Mortal::takeDamage(soundImpact, soundDeath);
+    if (!isAlive()) getWorld()->increaseScore(100);
+}
+
+//*********** THIEFBOT ***********//
+ThiefBot::ThiefBot(int hp, int imageID, double startX, double startY, StudentWorld* sWorld) : Robot(5, IID_THIEFBOT, startX, startY, sWorld) {
+    setDirection(right);
+    setDistanceBeforeTurning();
+    squaresMoved = 0;
+    hasThieved = false;
+    goodie = nullptr;
+}
+
+void ThiefBot::setDistanceBeforeTurning() {
+    distBeforeTurn = randInt(1, 6);
+}
+
+bool ThiefBot::setRandDirectionAndMove() {
+    int i = randInt(1, 4);
+    int dir = 0;
+    switch(i) {
+        case 1:
+            dir = up; break;
+        case 2:
+            dir = right; break;
+        case 3:
+            dir = down; break;
+        case 4:
+            dir = left; break;
+    }
+    if (canMove(dir)) {
+        setDirection(dir);
+        int newX, newY;
+        getPosInDir(getDirection(), newX, newY);
+        moveTo(newX, newY);
+        return true;
+    }
+    
+    if (canMove(up)) {
+        setDirection(up);
+        int newX, newY;
+        getPosInDir(getDirection(), newX, newY);
+        moveTo(newX, newY);
+        return true;
+    }
+    if (canMove(right)) {
+        setDirection(right);
+        int newX, newY;
+        getPosInDir(getDirection(), newX, newY);
+        moveTo(newX, newY);
+        return true;
+    }
+    if (canMove(down)) {
+        setDirection(down);
+        int newX, newY;
+        getPosInDir(getDirection(), newX, newY);
+        moveTo(newX, newY);
+        return true;
+    }
+    if (canMove(left)) {
+        setDirection(left);
+        int newX, newY;
+        getPosInDir(getDirection(), newX, newY);
+        moveTo(newX, newY);
+        return true;
+    }
+    
+    setDirection(dir);
+    return false;
+}
+
+void ThiefBot::doSomething() {
+    if (!isAlive()) return;
+    if (!canTakeAction()) {
+        incTick();
+        return;
+    }
+    incTick();
+    Actor *a = getWorld()->getActor(getX(), getY(), this);
+    if (a != nullptr && a->isThievable() && a->isVisible() && !hasThieved) {
+        if (randInt(1, 10) == 1) {
+            goodie = a;
+            a->setVisible(false);
+            getWorld()->playSound(SOUND_ROBOT_MUNCH);
+            return;
+        }
+    }
+    if (squaresMoved < distBeforeTurn) {
+        if (canMove(getDirection())) {
+            int newX, newY;
+            getPosInDir(getDirection(), newX, newY);
+            moveTo(newX, newY);
+            squaresMoved++;
+            return;
+        } else {
+            setDistanceBeforeTurning();
+            squaresMoved = 0;
+            if (setRandDirectionAndMove()) squaresMoved++;
+        }
+    } else {
+        setDistanceBeforeTurning();
+        squaresMoved = 0;
+        if (setRandDirectionAndMove()) squaresMoved++;
+    }
+}
+
+int ThiefBot::getSquaresMoved() {
+    return squaresMoved;
+}
+
+int ThiefBot::getDistBeforeTurn() {
+    return distBeforeTurn;
+}
+
+void ThiefBot::incSquares() {
+    squaresMoved++;
+}
+
+void ThiefBot::takeDamage(int soundImpact, int soundDeath) {
+    Mortal::takeDamage(soundImpact, soundDeath);
+    if (!isAlive()) {
+        getWorld()->increaseScore(10);
+        if (goodie != nullptr) {
+            goodie->moveTo(getX(), getY());
+            goodie->setVisible(true);
+        }
+    }
+}
+
+MeanThiefBot::MeanThiefBot(double startX, double startY, StudentWorld* sWorld) : ThiefBot(8, IID_MEAN_THIEFBOT, startX, startY, sWorld) {}
+
+void MeanThiefBot::doSomething() {
+    if (!isAlive()) return;
+    if (!canTakeAction()) {
+        incTick();
+        return;
+    }
+    incTick();
+    if (canFire()) {
+        shoot(SOUND_ENEMY_FIRE);
+        return;
+    }
+    ThiefBot::doSomething();
+}
+
+void MeanThiefBot::takeDamage(int soundImpact, int soundDeath) {
+    Mortal::takeDamage(soundImpact, soundDeath);
+    ThiefBot::takeDamage(soundImpact, soundDeath);
+    if (!isAlive()) {
+        getWorld()->increaseScore(10); //only 10 bc thiefbot alr increase by 10. 10+10=20
+    }
+}

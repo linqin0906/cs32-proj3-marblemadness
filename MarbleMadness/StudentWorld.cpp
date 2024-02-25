@@ -30,9 +30,7 @@ int StudentWorld::init()
 {
     numCrystals = 0; //needs to be here bc loadALevel adds crystals
 
-//    int levelLoad = loadALevel("level0" + to_string(getLevel()) + ".txt");
-
-    int levelLoad = loadALevel("level01.txt");
+    int levelLoad = loadALevel("level0" + to_string(getLevel()) + ".txt");
 
     if (levelLoad == -1 || getLevel() == 100) return GWSTATUS_PLAYER_WON; //no file or finished lvl99
     if (levelLoad == -2) return GWSTATUS_LEVEL_ERROR;
@@ -169,6 +167,10 @@ int StudentWorld::loadALevel(string currLevel) {
     if (result == Level::load_fail_file_not_found) return -1;
     if (result == Level::load_fail_bad_format) return -2;
     
+    actorList.push_back(new ThiefBot(-1, -1, 3, 6, this));
+    actorList.push_back(new ExtraLife(3, 7, this));
+
+    
     for (int r = 0; r < 15; r++) {
         for (int c = 0; c < 15; c++) {
             Level::MazeEntry item = lev.getContentsOf(r, c);
@@ -182,6 +184,8 @@ int StudentWorld::loadALevel(string currLevel) {
                 numCrystals++;
             } else if (item == Level::exit)
                 actorList.push_back(new Exit(r, c, this));
+            else if (item == Level::extra_life)
+                actorList.push_back(new ExtraLife(r, c, this));
             else if (item == Level::marble)
                 actorList.push_back(new Marble(r, c, this));
             else if (item == Level::pit)
