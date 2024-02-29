@@ -3282,6 +3282,48 @@
 			<key>uniqueIdentifier</key>
 			<string>423A0E20-A57A-4E84-B175-9986A601034E</string>
 		</dict>
+		<key>434315D7-6B8B-4368-A5EA-AB5CE2C6E926</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>434315D7-6B8B-4368-A5EA-AB5CE2C6E926.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+				<key>totalNumberOfAnalyzerIssues</key>
+				<integer>0</integer>
+				<key>totalNumberOfErrors</key>
+				<integer>0</integer>
+				<key>totalNumberOfTestFailures</key>
+				<integer>0</integer>
+				<key>totalNumberOfWarnings</key>
+				<integer>0</integer>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>MarbleMadness project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>MarbleMadness</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build MarbleMadness</string>
+			<key>timeStartedRecording</key>
+			<real>730933914.14222503</real>
+			<key>timeStoppedRecording</key>
+			<real>730933915.26221001</real>
+			<key>title</key>
+			<string>Build MarbleMadness</string>
+			<key>uniqueIdentifier</key>
+			<string>434315D7-6B8B-4368-A5EA-AB5CE2C6E926</string>
+		</dict>
 		<key>44A9343E-23EB-4A3C-94BA-9F8B8E025EB4</key>
 		<dict>
 			<key>className</key>

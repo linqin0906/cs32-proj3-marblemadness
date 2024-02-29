@@ -64,7 +64,6 @@ class ThiefbotFactory: public Actor {
 class Mortal: public Actor {
     public:
         Mortal(int hp, int imageID, double startX, double startY, StudentWorld* sWorld);
-        virtual void doSomething() = 0;
         virtual bool isDamageable() {return true;}
         virtual void takeDamage(int soundImpact, int soundDeath);
         int getHP();
@@ -108,7 +107,6 @@ class Avatar: public Fighter {
 class Robot: public Fighter {
     public:
         Robot(int hp, int imageID, double startX, double startY, StudentWorld* sWorld);
-        virtual void doSomething() = 0;
         bool canTakeAction();
         void incTick();
         int getTickCount();
@@ -154,7 +152,6 @@ class MeanThiefBot: public ThiefBot {
 class Collectable: public Actor {
     public:
         Collectable(int imageID, double startX, double startY, StudentWorld* sWorld);
-        virtual void doSomething() = 0;
         virtual bool isCollectable() {return true;}
         void beCollected(int points, int soundID=SOUND_GOT_GOODIE);
 };
@@ -174,7 +171,6 @@ class Exit: public Collectable {
 class Goodie: public Collectable {
     public:
         Goodie(int imageID, double startX, double startY, StudentWorld* sWorld);
-        virtual void doSomething()=0;
         virtual bool isThievable() {return true;}
 };
 
