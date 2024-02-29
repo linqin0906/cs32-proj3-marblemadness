@@ -235,7 +235,7 @@ bool Fighter::canMove(int dir) {
 }
 
 //*********** AVATAR ***********//
-Avatar::Avatar (double startX, double startY, StudentWorld* sWorld) : Fighter(20, IID_PLAYER, startX, startY, sWorld) { //FIXME: not sure about the fighter constructor
+Avatar::Avatar (double startX, double startY, StudentWorld* sWorld) : Fighter(20, IID_PLAYER, startX, startY, sWorld) {
     setDirection(right);
     peaCount = 20;
 }
@@ -274,7 +274,6 @@ void Avatar::doSomething() {
     }
 }
 
-//FIXME: only checks to see if there's something else
 bool Avatar::canMove(int dir) {
     if (!Fighter::canMove(dir)) return false;
     
@@ -427,7 +426,7 @@ void RageBot::takeDamage(int soundImpact, int soundDeath) {
 }
 
 //*********** THIEFBOT ***********//
-ThiefBot::ThiefBot(int hp, int imageID, double startX, double startY, StudentWorld* sWorld) : Robot(5, IID_THIEFBOT, startX, startY, sWorld) {
+ThiefBot::ThiefBot(double startX, double startY, StudentWorld* sWorld, int hp, int imageID) : Robot(hp, imageID, startX, startY, sWorld) {
     setDirection(right);
     setDistanceBeforeTurning();
     squaresMoved = 0;
@@ -493,13 +492,8 @@ bool ThiefBot::setRandDirectionAndMove() {
     return false;
 }
 
-void ThiefBot::doSomething() {
-    if (!isAlive()) return;
-    if (!canTakeAction()) {
-        incTick();
-        return;
-    }
-    incTick();
+//thiefbot actions without incrementing ticks
+void ThiefBot::doThiefBot() {
     Actor *a = getWorld()->getActor(getX(), getY(), this);
     if (a != nullptr && a->isThievable() && a->isVisible() && !hasThieved) {
         if (randInt(1, 10) == 1) {
@@ -528,16 +522,14 @@ void ThiefBot::doSomething() {
     }
 }
 
-int ThiefBot::getSquaresMoved() {
-    return squaresMoved;
-}
-
-int ThiefBot::getDistBeforeTurn() {
-    return distBeforeTurn;
-}
-
-void ThiefBot::incSquares() {
-    squaresMoved++;
+void ThiefBot::doSomething() {
+    if (!isAlive()) return;
+    if (!canTakeAction()) {
+        incTick();
+        return;
+    }
+    incTick();
+    doThiefBot();
 }
 
 void ThiefBot::takeDamage(int soundImpact, int soundDeath) {
@@ -551,10 +543,12 @@ void ThiefBot::takeDamage(int soundImpact, int soundDeath) {
     }
 }
 
-MeanThiefBot::MeanThiefBot(double startX, double startY, StudentWorld* sWorld) : ThiefBot(8, IID_MEAN_THIEFBOT, startX, startY, sWorld) {}
+//*********** MEANTHIEFBOT ***********//
+MeanThiefBot::MeanThiefBot(double startX, double startY, StudentWorld* sWorld) : ThiefBot(startX, startY, sWorld, 8, IID_MEAN_THIEFBOT) {}
 
 void MeanThiefBot::doSomething() {
     if (!isAlive()) return;
+
     if (!canTakeAction()) {
         incTick();
         return;
@@ -564,7 +558,7 @@ void MeanThiefBot::doSomething() {
         shoot(SOUND_ENEMY_FIRE);
         return;
     }
-    ThiefBot::doSomething();
+    doThiefBot();
 }
 
 void MeanThiefBot::takeDamage(int soundImpact, int soundDeath) {

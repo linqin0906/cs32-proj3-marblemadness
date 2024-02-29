@@ -166,11 +166,7 @@ int StudentWorld::loadALevel(string currLevel) {
     
     if (result == Level::load_fail_file_not_found) return -1;
     if (result == Level::load_fail_bad_format) return -2;
-    
-    actorList.push_back(new ThiefBot(-1, -1, 3, 6, this));
-    actorList.push_back(new ExtraLife(3, 7, this));
-
-    
+        
     for (int r = 0; r < 15; r++) {
         for (int c = 0; c < 15; c++) {
             Level::MazeEntry item = lev.getContentsOf(r, c);

@@ -11,6 +11,7 @@ class StudentWorld;
 class Actor: public GraphObject {
     public:
         Actor(int imageID, double startX, double startY, StudentWorld* sWorld);
+        virtual ~Actor() {}
         virtual void doSomething() = 0;
         void getPosInDir(int dir, int& newX, int& newY);
         virtual bool canScore() {return false;}
@@ -128,12 +129,10 @@ class RageBot: public Robot {
 // *********** THIEFBOT *********** //
 class ThiefBot: public Robot {
     public:
-        ThiefBot(int hp, int imageID, double startX, double startY, StudentWorld* sWorld);
+        ThiefBot(double startX, double startY, StudentWorld* sWorld, int hp=5, int imageID=IID_THIEFBOT);
+        void doThiefBot();
         virtual void doSomething();
         virtual void takeDamage(int soundImpact, int soundDeath);
-        int getSquaresMoved();
-        int getDistBeforeTurn();
-        void incSquares();
     private:
         void setDistanceBeforeTurning();
         bool setRandDirectionAndMove();
@@ -143,6 +142,7 @@ class ThiefBot: public Robot {
         Actor* goodie;
 };
 
+// *********** MEANTHIEFBOT *********** //
 class MeanThiefBot: public ThiefBot {
     public:
         MeanThiefBot(double startX, double startY, StudentWorld* sWorld);
