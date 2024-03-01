@@ -55,7 +55,7 @@ class Wall: public Actor {
 
 class ThiefbotFactory: public Actor {
     public:
-        ThiefbotFactory(std::string botType, double startX, double startY, StudentWorld* sWorld);
+        ThiefbotFactory(int botType, double startX, double startY, StudentWorld* sWorld);
         virtual void doSomething();
         virtual bool canKillPeas() {return true;}
 };
@@ -97,6 +97,7 @@ class Avatar: public Fighter {
         virtual bool canScore() {return true;}
         bool makePush(Actor* a);
         int getPeaCount();
+        void incPeaCount(int amt);
         double getHealthPercentage();
         virtual bool canMove(int dir);
     private:
@@ -179,6 +180,19 @@ class ExtraLife: public Goodie {
         ExtraLife(double startX, double startY, StudentWorld* sWorld);
         virtual void doSomething();
 };
+
+class RestoreHealth: public Goodie {
+    public:
+        RestoreHealth(double startX, double startY, StudentWorld* sWorld);
+        virtual void doSomething();
+};
+
+class Ammo: public Goodie {
+    public:
+        Ammo(double startX, double startY, StudentWorld* sWorld);
+        virtual void doSomething();
+};
+
 
 
 

@@ -167,8 +167,8 @@ int StudentWorld::loadALevel(string currLevel) {
     if (result == Level::load_fail_file_not_found) return -1;
     if (result == Level::load_fail_bad_format) return -2;
         
-    for (int r = 0; r < 15; r++) {
-        for (int c = 0; c < 15; c++) {
+    for (int r = 0; r < VIEW_WIDTH; r++) {
+        for (int c = 0; c < VIEW_HEIGHT; c++) {
             Level::MazeEntry item = lev.getContentsOf(r, c);
             
             if (item == Level::player)
@@ -182,6 +182,10 @@ int StudentWorld::loadALevel(string currLevel) {
                 actorList.push_back(new Exit(r, c, this));
             else if (item == Level::extra_life)
                 actorList.push_back(new ExtraLife(r, c, this));
+            else if (item == Level::restore_health)
+                actorList.push_back(new RestoreHealth(r, c, this));
+            else if (item == Level::ammo)
+                actorList.push_back(new Ammo(r, c, this));
             else if (item == Level::marble)
                 actorList.push_back(new Marble(r, c, this));
             else if (item == Level::pit)

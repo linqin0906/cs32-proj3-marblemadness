@@ -70,7 +70,9 @@ void Pea::doSomething() {
     if (!isAlive()) return;
 
     if (makeWarAndPeas()) return; //pea made contact
-    moveForward();
+    int newX, newY;
+    getPosInDir(getDirection(), newX, newY);
+    moveTo(newX, newY);
     if (makeWarAndPeas()) return;
 }
 
@@ -116,6 +118,13 @@ bool Pea::makeWarAndPeas() { //max 3 nonplayer actors on a square: robot, factor
 Wall::Wall (double startX, double startY, StudentWorld* sWorld): Actor(IID_WALL, startX, startY, sWorld) {}
 
 void Wall::doSomething() {}
+
+//*********** THIEFBOTFACTORY ***********//
+ThiefbotFactory::ThiefbotFactory(int botType, double startX, double startY, StudentWorld* sWorld) : Actor(IID_ROBOT_FACTORY, startX, startY, sWorld) {}
+
+void ThiefbotFactory::doSomething() {
+    
+}
 
 //*********** COLLECTABLE ***********//
 Collectable::Collectable(int imageID, double startX, double startY, StudentWorld* sWorld): Actor(imageID, startX, startY, sWorld) {}
@@ -168,6 +177,31 @@ void ExtraLife::doSomething() {
         getWorld()->incLives();
     }
 }
+
+//*********** RESTOREHEALTH ***********//
+RestoreHealth::RestoreHealth(double startX, double startY, StudentWorld* sWorld) : Goodie (IID_RESTORE_HEALTH, startX, startY, sWorld) {}
+
+void RestoreHealth::doSomething() {
+    if (!isAlive()) return;
+    if (!isVisible()) return;
+    if (getWorld()->isPlayerOn(getX(), getY())) {
+        beCollected(500);
+        getWorld()->getPlayer()->setHP(20);
+    }
+}
+
+//*********** AMMO ***********//
+Ammo::Ammo(double startX, double startY, StudentWorld* sWorld) : Goodie (IID_AMMO, startX, startY, sWorld) {}
+
+void Ammo::doSomething() {
+    if (!isAlive()) return;
+    if (!isVisible()) return;
+    if (getWorld()->isPlayerOn(getX(), getY())) {
+        beCollected(100);
+        getWorld()->getPlayer()->incPeaCount(20);
+    }
+}
+
 
 //*********** MORTAL ***********//
 Mortal::Mortal(int hp, int imageID, double startX, double startY, StudentWorld* sWorld): Actor(imageID, startX, startY, sWorld) {
@@ -305,6 +339,10 @@ int Avatar::getPeaCount() {
     return peaCount;
 }
 
+void Avatar::incPeaCount(int amt) {
+    peaCount += amt;
+}
+
 double Avatar::getHealthPercentage() {
     double percent = getHP() * 1.0/20;
     setprecision(2);
@@ -338,7 +376,7 @@ bool Robot::canFire() {
     int dir = getDirection();
     switch(dir) {
         case up:
-            for (int y = getY() + 1; y < 15; y++) {
+            for (int y = getY() + 1; y < VIEW_HEIGHT; y++) {
                 if (getWorld()->isPlayerOn(getX(), y)) return true; //player found w/o obstacles
                 Actor* a = getWorld()->getActor(getX(), y, this);
                 if (a != nullptr) {
@@ -346,7 +384,7 @@ bool Robot::canFire() {
                 }
             } break;
         case right:
-            for (int x = getX() + 1; x < 15; x++) {
+            for (int x = getX() + 1; x < VIEW_WIDTH; x++) {
                 if (getWorld()->isPlayerOn(x, getY())) return true; //player found w/o obstacles
                 Actor* a = getWorld()->getActor(x, getY(), this);
                 if (a != nullptr) {
