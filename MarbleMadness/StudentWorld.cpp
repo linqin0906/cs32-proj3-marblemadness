@@ -31,7 +31,7 @@ int StudentWorld::init()
     numCrystals = 0; //needs to be here bc loadALevel adds crystals
 
     int levelLoad = loadALevel("level0" + to_string(getLevel()) + ".txt");
-
+    
     if (levelLoad == -1 || getLevel() == 100) return GWSTATUS_PLAYER_WON; //no file or finished lvl99
     if (levelLoad == -2) return GWSTATUS_LEVEL_ERROR;
     
@@ -231,6 +231,7 @@ bool StudentWorld::everyoneDoSomething() {
     }
     return true;
 }
+
 
 void StudentWorld::cleanDeadActors() {
     list<Actor*>::iterator it = actorList.begin();

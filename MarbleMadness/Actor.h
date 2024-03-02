@@ -17,7 +17,7 @@ class Actor: public GraphObject {
         virtual bool canScore() {return false;}
         virtual bool isCollectable() {return false;}
         virtual bool isDamageable() {return false;}
-        virtual bool canKillPeas() {return false;} //walls/factories
+        virtual bool canKillPeas() {return false;}
         virtual bool canReceive() {return false;} //for pits
         virtual bool canAttack() {return false;}
         virtual bool isThievable() {return false;} //for goodies

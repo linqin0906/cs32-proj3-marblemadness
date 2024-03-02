@@ -82,19 +82,27 @@ bool Pea::makeWarAndPeas() { //max 3 nonplayer actors on a square: robot, factor
     Actor *a = getWorld()->getActor(getX(), getY(), this); //robot or factory
     Actor *b = getWorld()->getActor(getX(), getY(), a, this); //if a is robot, b could be factory, and vice versa
     
-    //1: a is robot, b is factory
-    //2: b factory, a robot
+    //1: a is robot (or marble), b is factory
+    //2: b factory, a robot (or marble)
     //3. a is null, b is factory/wall
     //4. b is null, a is factory/wall
     //5. a and b both null
     
     //if a is robot, b cannot be robot. check for robots first
     if (a != nullptr && a->isDamageable()) {
-        a->takeDamage(SOUND_ROBOT_IMPACT, SOUND_ROBOT_DIE);
+        if (a->canAttack()) { //is robot
+            a->takeDamage(SOUND_ROBOT_IMPACT, SOUND_ROBOT_DIE);
+        } else { //marble
+            a->takeDamage(-1, -1);
+        }
         setAlive(false);
         return true;
     } else if (b != nullptr && b->isDamageable()) {
-        b->takeDamage(SOUND_ROBOT_IMPACT, SOUND_ROBOT_DIE);
+        if (b->canAttack()) { //robot
+            b->takeDamage(SOUND_ROBOT_IMPACT, SOUND_ROBOT_DIE);
+        } else { //marble
+            b->takeDamage(-1, -1);
+        }
         setAlive(false);
         return true;
     }
