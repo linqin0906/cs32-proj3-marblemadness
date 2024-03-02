@@ -21,12 +21,14 @@ public:
   virtual void cleanUp();
     Actor* getActor(int r, int c, Actor* a);
     Actor* getActor(int r, int c, Actor* a, Actor* b);
+    Actor* getThiefBot(int r, int c);
     bool isPlayerOn(int r, int c);
     Avatar* getPlayer();
     int getCrystals();
     void decCrystals();
     void setLevelComplete(bool complete);
     void spawnPea(int dir, int x, int y);
+    void spawnThiefBot(int type, int x, int y);
     int computeTicks();
 
     ~StudentWorld();

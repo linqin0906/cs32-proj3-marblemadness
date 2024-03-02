@@ -27,6 +27,7 @@ void Actor::setAlive(bool alive) {
     liveStatus = alive;
 }
 
+//get position to move to given direction
 void Actor::getPosInDir(int dir, int& newX, int& newY) {
     int currX = getX();
     int currY = getY();
@@ -76,6 +77,7 @@ void Pea::doSomething() {
     if (makeWarAndPeas()) return;
 }
 
+//evaluates whether to be damaged or damage something else
 bool Pea::makeWarAndPeas() { //max 3 nonplayer actors on a square: robot, factory, pea
     Actor *a = getWorld()->getActor(getX(), getY(), this); //robot or factory
     Actor *b = getWorld()->getActor(getX(), getY(), a, this); //if a is robot, b could be factory, and vice versa
@@ -120,10 +122,29 @@ Wall::Wall (double startX, double startY, StudentWorld* sWorld): Actor(IID_WALL,
 void Wall::doSomething() {}
 
 //*********** THIEFBOTFACTORY ***********//
-ThiefbotFactory::ThiefbotFactory(int botType, double startX, double startY, StudentWorld* sWorld) : Actor(IID_ROBOT_FACTORY, startX, startY, sWorld) {}
+ThiefbotFactory::ThiefbotFactory(int botType, double startX, double startY, StudentWorld* sWorld) : Actor(IID_ROBOT_FACTORY, startX, startY, sWorld) {
+        type = botType;
+}
 
 void ThiefbotFactory::doSomething() {
-    
+    int count = countBots();
+    if (count != -1 && count < 3) {
+        if (randInt(1, 50) == 1) {
+            getWorld()->spawnThiefBot(type, getX(), getY());
+            getWorld()->playSound(SOUND_ROBOT_BORN);
+        }
+    }
+}
+
+int ThiefbotFactory::countBots() {
+    int thiefBotCount = 0;
+    if (getWorld()->getThiefBot(getX(), getY()) != nullptr) return -1; //don't spawn
+    for (int r = getX() - 1; r < getX()+2; r++) {
+        for (int c = getY()-1; c < getY()+2; c++) {
+            if (getWorld()->getThiefBot(r, c) != nullptr) thiefBotCount++;
+        }
+    }
+    return thiefBotCount;
 }
 
 //*********** COLLECTABLE ***********//
@@ -274,7 +295,6 @@ Avatar::Avatar (double startX, double startY, StudentWorld* sWorld) : Fighter(20
     peaCount = 20;
 }
 
-//FIXME: incomplete
 void Avatar::doSomething() {
     if (!isAlive()) return;
     int ch;
@@ -464,7 +484,8 @@ void RageBot::takeDamage(int soundImpact, int soundDeath) {
 }
 
 //*********** THIEFBOT ***********//
-ThiefBot::ThiefBot(double startX, double startY, StudentWorld* sWorld, int hp, int imageID) : Robot(hp, imageID, startX, startY, sWorld) {
+ThiefBot::ThiefBot(double startX, double startY, StudentWorld* sWorld, int hp, int imageID) : Robot(hp, imageID, startX, startY, sWorld) //starts with default parameters for hp and imageID
+{
     setDirection(right);
     setDistanceBeforeTurning();
     squaresMoved = 0;

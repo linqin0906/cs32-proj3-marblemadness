@@ -21,6 +21,7 @@ class Actor: public GraphObject {
         virtual bool canReceive() {return false;}
         virtual bool canAttack() {return false;}
         virtual bool isThievable() {return false;}
+        virtual bool canSteal() {return false;}
         virtual bool push(int r, int c) {return false;} //returns false if not pushable
         virtual void takeDamage(int soundImpact, int soundDeath) {} //does nothing if not Mortal
         bool isAlive();
@@ -57,7 +58,10 @@ class ThiefbotFactory: public Actor {
     public:
         ThiefbotFactory(int botType, double startX, double startY, StudentWorld* sWorld);
         virtual void doSomething();
+        int countBots();
         virtual bool canKillPeas() {return true;}
+    private:
+        int type;
 };
 
 // *********** MORTALS *********** //
@@ -132,6 +136,7 @@ class ThiefBot: public Robot {
         void doThiefBot();
         virtual void doSomething();
         virtual void takeDamage(int soundImpact, int soundDeath);
+        virtual bool canSteal() {return true;}
     private:
         void setDistanceBeforeTurning();
         bool setRandDirectionAndMove();

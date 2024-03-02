@@ -73,14 +73,13 @@ void StudentWorld::cleanUp()
         it = actorList.erase(it);
         delete temp;
     }
-    
 }
 
 //checks for NONPLAYER actors. COULD RETURN ITSELF
 Actor* StudentWorld::getActor(int r, int c, Actor* a) {
     list<Actor*>::iterator it = actorList.begin();
     while (it != actorList.end()) {
-        if ((*it)->getX() == r && (*it)->getY() == c && ((*it) != a)) //make sure you don't return yourself
+        if ((*it)->getX() == r && (*it)->getY() == c && ((*it) != a) && (*it)->isVisible()) //make sure you don't return yourself
             return *it;
         it++;
     }
@@ -91,7 +90,17 @@ Actor* StudentWorld::getActor(int r, int c, Actor* a) {
 Actor* StudentWorld::getActor(int r, int c, Actor* a, Actor* b) {
     list<Actor*>::iterator it = actorList.begin();
     while (it != actorList.end()) {
-        if ((*it)->getX() == r && (*it)->getY() == c && ((*it) != a) && ((*it) != b)) //make sure you don't return yourself
+        if ((*it)->getX() == r && (*it)->getY() == c && ((*it) != a) && ((*it) != b) && (*it)->isVisible()) //make sure you don't return yourself
+            return *it;
+        it++;
+    }
+    return nullptr;
+}
+
+Actor* StudentWorld::getThiefBot(int r, int c) {
+    list<Actor*>::iterator it = actorList.begin();
+    while (it != actorList.end()) {
+        if ((*it)->getX() == r && (*it)->getY() == c && (*it)->canSteal())
             return *it;
         it++;
     }
@@ -99,7 +108,7 @@ Actor* StudentWorld::getActor(int r, int c, Actor* a, Actor* b) {
 }
 
 bool StudentWorld::isPlayerOn(int r, int c) {
-    if (player == nullptr) return false;
+    if (player == nullptr || !player->isAlive()) return false;
     if (player->getX() == r && player->getY() == c) return true;
     return false;
 }
@@ -139,6 +148,14 @@ void StudentWorld::setDisplayText() {
 
 void StudentWorld::spawnPea(int dir, int x, int y) {
     actorList.push_front(new Pea(dir, x, y, this));
+}
+
+void StudentWorld::spawnThiefBot(int type, int x, int y) {
+    if (type == 1) {
+        actorList.push_front(new ThiefBot(x, y, this));
+    } else {
+        actorList.push_front(new MeanThiefBot(x, y, this));
+    }
 }
 
 int StudentWorld::computeTicks() {
@@ -194,6 +211,10 @@ int StudentWorld::loadALevel(string currLevel) {
                 actorList.push_back(new RageBot(0, r, c, this));
             else if (item == Level::vert_ragebot)
                 actorList.push_back(new RageBot(270, r, c, this));
+            else if (item == Level::thiefbot_factory       )
+                actorList.push_back(new ThiefbotFactory(1, r, c, this));
+            else if (item == Level::mean_thiefbot_factory)
+                actorList.push_back(new ThiefbotFactory(2, r, c, this));
         }
     }
     return 0;
