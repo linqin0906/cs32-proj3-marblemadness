@@ -17,11 +17,11 @@ class Actor: public GraphObject {
         virtual bool canScore() {return false;}
         virtual bool isCollectable() {return false;}
         virtual bool isDamageable() {return false;}
-        virtual bool canKillPeas() {return false;}
-        virtual bool canReceive() {return false;}
+        virtual bool canKillPeas() {return false;} //walls/factories
+        virtual bool canReceive() {return false;} //for pits
         virtual bool canAttack() {return false;}
-        virtual bool isThievable() {return false;}
-        virtual bool canSteal() {return false;}
+        virtual bool isThievable() {return false;} //for goodies
+        virtual bool canSteal() {return false;} //for thiefbots
         virtual bool push(int r, int c) {return false;} //returns false if not pushable
         virtual void takeDamage(int soundImpact, int soundDeath) {} //does nothing if not Mortal
         bool isAlive();
@@ -197,8 +197,5 @@ class Ammo: public Goodie {
         Ammo(double startX, double startY, StudentWorld* sWorld);
         virtual void doSomething();
 };
-
-
-
 
 #endif // ACTOR_H_

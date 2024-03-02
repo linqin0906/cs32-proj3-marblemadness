@@ -123,7 +123,7 @@ void Wall::doSomething() {}
 
 //*********** THIEFBOTFACTORY ***********//
 ThiefbotFactory::ThiefbotFactory(int botType, double startX, double startY, StudentWorld* sWorld) : Actor(IID_ROBOT_FACTORY, startX, startY, sWorld) {
-        type = botType;
+        type = botType; //if type = 1, regular thiefbot. type=2 is meanthiefbot
 }
 
 void ThiefbotFactory::doSomething() {
@@ -223,7 +223,6 @@ void Ammo::doSomething() {
     }
 }
 
-
 //*********** MORTAL ***********//
 Mortal::Mortal(int hp, int imageID, double startX, double startY, StudentWorld* sWorld): Actor(imageID, startX, startY, sWorld) {
     hitpoints = hp;
@@ -233,7 +232,7 @@ void Mortal::takeDamage(int soundImpact, int soundDeath) {
     hitpoints -= 2;
     if (hitpoints <= 0) {
         setAlive(false);
-        if (soundDeath != -1) getWorld()->playSound(soundDeath);
+        if (soundDeath != -1) getWorld()->playSound(soundDeath); //soundDeath = -1 means no sound
         return;
     }
     if (soundImpact != -1) {

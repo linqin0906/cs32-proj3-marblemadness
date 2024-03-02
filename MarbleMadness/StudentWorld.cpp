@@ -42,7 +42,6 @@ int StudentWorld::init()
 
 int StudentWorld::move()
 {
-    // This code is here merely to allow the game to build, run, and terminate after you type q
     setDisplayText();
     
     bool result = everyoneDoSomething();
